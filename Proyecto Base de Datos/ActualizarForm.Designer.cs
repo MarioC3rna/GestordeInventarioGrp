@@ -35,12 +35,12 @@
             lblCodigoProductoB = new Label();
             txtBoxCodigoProductoB = new TextBox();
             lblNombreProductoBU = new Label();
-            textBoxNombreProductoBU = new TextBox(); // ✅ CAMPO DE BÚSQUEDA POR NOMBRE
-            lblCategoriaProductoBU = new Label();
-            textBoxCategoriaProductoBU = new TextBox();
+            textBoxNombreProductoBU = new TextBox();
             buttonBuscar = new Button();
-            lblNombreProducto = new Label(); // Campo de RESULTADO
-            txtBoxNombreProducto = new TextBox(); // Campo de RESULTADO
+            lblCodigoProducto = new Label();
+            txtBoxCodigoProducto = new TextBox();
+            lblNombreProducto = new Label();
+            txtBoxNombreProducto = new TextBox();
             labelDescripcion = new Label();
             textBoxDescripcion = new TextBox();
             labelCostoUnitario = new Label();
@@ -50,13 +50,19 @@
             labelFecha = new Label();
             dateTimePicker1 = new DateTimePicker();
             lblUnidadMedida = new Label();
-            comboBoxUnidadMedida = new ComboBox();
+            textBoxUnidadMedida = new TextBox();
+            lblAbrevLongitud = new Label();
+            textBoxAbrevLongitud = new TextBox();
+            lblPeso = new Label();
+            textBoxPeso = new TextBox();
+            lblAbrevPeso = new Label();
+            textBoxAbrevPeso = new TextBox();
             lblProveedor = new Label();
-            comboBoxProveedor = new ComboBox();
+            textBoxProveedorNombre = new TextBox();
             lblTipoServicioProducto = new Label();
-            comboBoxTipoServicioProducto = new ComboBox();
+            textBoxTipoServicioTipo = new TextBox();
             labelCategoria = new Label();
-            comboBoxCategoria = new ComboBox();
+            textBoxCategoria = new TextBox();
             labelStock = new Label();
             textBoxStock = new TextBox();
             labelImagen = new Label();
@@ -74,13 +80,13 @@
             panel1.Location = new Point(0, 0);
             panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(175, 450);
+            panel1.Size = new Size(175, 550);
             panel1.TabIndex = 1;
             // 
             // buttonAtras
             // 
             buttonAtras.ImeMode = ImeMode.NoControl;
-            buttonAtras.Location = new Point(37, 410);
+            buttonAtras.Location = new Point(37, 510);
             buttonAtras.Margin = new Padding(3, 2, 3, 2);
             buttonAtras.Name = "buttonAtras";
             buttonAtras.Size = new Size(82, 22);
@@ -91,13 +97,15 @@
             // 
             // btnACTUALIZAR
             // 
-            btnACTUALIZAR.Location = new Point(540, 350);
+            btnACTUALIZAR.BackColor = Color.MediumSlateBlue;
+            btnACTUALIZAR.ForeColor = Color.White;
+            btnACTUALIZAR.Location = new Point(540, 480);
             btnACTUALIZAR.Margin = new Padding(3, 2, 3, 2);
             btnACTUALIZAR.Name = "btnACTUALIZAR";
             btnACTUALIZAR.Size = new Size(120, 35);
             btnACTUALIZAR.TabIndex = 2;
             btnACTUALIZAR.Text = "ACTUALIZAR";
-            btnACTUALIZAR.UseVisualStyleBackColor = true;
+            btnACTUALIZAR.UseVisualStyleBackColor = false;
             btnACTUALIZAR.Click += btnACTUALIZAR_Click;
             // 
             // lblTitulo
@@ -116,7 +124,7 @@
             // lblCodigoProductoB
             // 
             lblCodigoProductoB.AutoSize = true;
-            lblCodigoProductoB.Location = new Point(188, 80);
+            lblCodigoProductoB.Location = new Point(188, 56);
             lblCodigoProductoB.Name = "lblCodigoProductoB";
             lblCodigoProductoB.Size = new Size(117, 15);
             lblCodigoProductoB.TabIndex = 4;
@@ -124,7 +132,7 @@
             // 
             // txtBoxCodigoProductoB
             // 
-            txtBoxCodigoProductoB.Location = new Point(327, 78);
+            txtBoxCodigoProductoB.Location = new Point(327, 53);
             txtBoxCodigoProductoB.Margin = new Padding(3, 2, 3, 2);
             txtBoxCodigoProductoB.Name = "txtBoxCodigoProductoB";
             txtBoxCodigoProductoB.Size = new Size(110, 23);
@@ -134,7 +142,7 @@
             // lblNombreProductoBU
             // 
             lblNombreProductoBU.AutoSize = true;
-            lblNombreProductoBU.Location = new Point(188, 56);
+            lblNombreProductoBU.Location = new Point(188, 81);
             lblNombreProductoBU.Name = "lblNombreProductoBU";
             lblNombreProductoBU.Size = new Size(122, 15);
             lblNombreProductoBU.TabIndex = 6;
@@ -142,32 +150,15 @@
             // 
             // textBoxNombreProductoBU
             // 
-            textBoxNombreProductoBU.Location = new Point(327, 53);
+            textBoxNombreProductoBU.Location = new Point(327, 78);
             textBoxNombreProductoBU.Margin = new Padding(3, 2, 3, 2);
             textBoxNombreProductoBU.Name = "textBoxNombreProductoBU";
             textBoxNombreProductoBU.Size = new Size(110, 23);
             textBoxNombreProductoBU.TabIndex = 7;
             // 
-            // lblCategoriaProductoBU
-            // 
-            lblCategoriaProductoBU.AutoSize = true;
-            lblCategoriaProductoBU.Location = new Point(180, 105);
-            lblCategoriaProductoBU.Name = "lblCategoriaProductoBU";
-            lblCategoriaProductoBU.Size = new Size(129, 15);
-            lblCategoriaProductoBU.TabIndex = 8;
-            lblCategoriaProductoBU.Text = "Categoria del Producto";
-            // 
-            // textBoxCategoriaProductoBU
-            // 
-            textBoxCategoriaProductoBU.Location = new Point(327, 103);
-            textBoxCategoriaProductoBU.Margin = new Padding(3, 2, 3, 2);
-            textBoxCategoriaProductoBU.Name = "textBoxCategoriaProductoBU";
-            textBoxCategoriaProductoBU.Size = new Size(110, 23);
-            textBoxCategoriaProductoBU.TabIndex = 9;
-            // 
             // buttonBuscar
             // 
-            buttonBuscar.Location = new Point(341, 133);
+            buttonBuscar.Location = new Point(341, 108);
             buttonBuscar.Margin = new Padding(3, 2, 3, 2);
             buttonBuscar.Name = "buttonBuscar";
             buttonBuscar.Size = new Size(82, 22);
@@ -176,182 +167,250 @@
             buttonBuscar.UseVisualStyleBackColor = true;
             buttonBuscar.Click += buttonBuscar_Click;
             // 
-            // lblNombreProducto - ETIQUETA PARA RESULTADO
+            // lblCodigoProducto
+            // 
+            lblCodigoProducto.AutoSize = true;
+            lblCodigoProducto.Location = new Point(188, 148);
+            lblCodigoProducto.Name = "lblCodigoProducto";
+            lblCodigoProducto.Size = new Size(117, 15);
+            lblCodigoProducto.TabIndex = 11;
+            lblCodigoProducto.Text = "Codigo del Producto";
+            // 
+            // txtBoxCodigoProducto
+            // 
+            txtBoxCodigoProducto.Location = new Point(394, 148);
+            txtBoxCodigoProducto.Margin = new Padding(3, 2, 3, 2);
+            txtBoxCodigoProducto.Name = "txtBoxCodigoProducto";
+            txtBoxCodigoProducto.Size = new Size(110, 23);
+            txtBoxCodigoProducto.TabIndex = 12;
+            // 
+            // lblNombreProducto
             // 
             lblNombreProducto.AutoSize = true;
             lblNombreProducto.Location = new Point(188, 173);
             lblNombreProducto.Name = "lblNombreProducto";
             lblNombreProducto.Size = new Size(122, 15);
-            lblNombreProducto.TabIndex = 11;
+            lblNombreProducto.TabIndex = 13;
             lblNombreProducto.Text = "Nombre del Producto";
             // 
-            // txtBoxNombreProducto - CAMPO DE RESULTADO
+            // txtBoxNombreProducto
             // 
             txtBoxNombreProducto.Location = new Point(394, 173);
             txtBoxNombreProducto.Margin = new Padding(3, 2, 3, 2);
             txtBoxNombreProducto.Name = "txtBoxNombreProducto";
             txtBoxNombreProducto.Size = new Size(110, 23);
-            txtBoxNombreProducto.TabIndex = 12;
+            txtBoxNombreProducto.TabIndex = 14;
             // 
             // labelDescripcion
             // 
             labelDescripcion.AutoSize = true;
-            labelDescripcion.Location = new Point(188, 198);
+            labelDescripcion.Location = new Point(214, 495);
             labelDescripcion.Name = "labelDescripcion";
             labelDescripcion.Size = new Size(69, 15);
-            labelDescripcion.TabIndex = 13;
+            labelDescripcion.TabIndex = 15;
             labelDescripcion.Text = "Descripcion";
             // 
             // textBoxDescripcion
             // 
-            textBoxDescripcion.Location = new Point(394, 198);
+            textBoxDescripcion.Location = new Point(290, 256);
             textBoxDescripcion.Margin = new Padding(3, 2, 3, 2);
             textBoxDescripcion.Name = "textBoxDescripcion";
-            textBoxDescripcion.Size = new Size(110, 23);
-            textBoxDescripcion.TabIndex = 14;
+            textBoxDescripcion.Size = new Size(214, 23);
+            textBoxDescripcion.TabIndex = 16;
             // 
             // labelCostoUnitario
             // 
             labelCostoUnitario.AutoSize = true;
-            labelCostoUnitario.Location = new Point(188, 224);
+            labelCostoUnitario.Location = new Point(188, 200);
             labelCostoUnitario.Name = "labelCostoUnitario";
             labelCostoUnitario.Size = new Size(83, 15);
-            labelCostoUnitario.TabIndex = 15;
+            labelCostoUnitario.TabIndex = 17;
             labelCostoUnitario.Text = "Costo Unitario";
             // 
             // textBoxCostoUnitario
             // 
-            textBoxCostoUnitario.Location = new Point(394, 224);
+            textBoxCostoUnitario.Location = new Point(394, 200);
             textBoxCostoUnitario.Margin = new Padding(3, 2, 3, 2);
             textBoxCostoUnitario.Name = "textBoxCostoUnitario";
             textBoxCostoUnitario.Size = new Size(110, 23);
-            textBoxCostoUnitario.TabIndex = 16;
+            textBoxCostoUnitario.TabIndex = 18;
             // 
             // labelDescuento
             // 
             labelDescuento.AutoSize = true;
-            labelDescuento.Location = new Point(188, 250);
+            labelDescuento.Location = new Point(188, 259);
             labelDescuento.Name = "labelDescuento";
             labelDescuento.Size = new Size(63, 15);
-            labelDescuento.TabIndex = 17;
+            labelDescuento.TabIndex = 19;
             labelDescuento.Text = "Descuento";
             // 
             // textBoxDescuento
             // 
-            textBoxDescuento.Location = new Point(394, 250);
+            textBoxDescuento.Location = new Point(394, 226);
             textBoxDescuento.Margin = new Padding(3, 2, 3, 2);
             textBoxDescuento.Name = "textBoxDescuento";
             textBoxDescuento.Size = new Size(110, 23);
-            textBoxDescuento.TabIndex = 18;
+            textBoxDescuento.TabIndex = 20;
             // 
             // labelFecha
             // 
             labelFecha.AutoSize = true;
-            labelFecha.Location = new Point(188, 274);
+            labelFecha.Location = new Point(188, 285);
             labelFecha.Name = "labelFecha";
             labelFecha.Size = new Size(96, 15);
-            labelFecha.TabIndex = 19;
+            labelFecha.TabIndex = 21;
             labelFecha.Text = "Fecha de Ingreso";
             // 
             // dateTimePicker1
             // 
-            dateTimePicker1.Location = new Point(290, 272);
+            dateTimePicker1.Location = new Point(290, 283);
             dateTimePicker1.Margin = new Padding(3, 2, 3, 2);
             dateTimePicker1.Name = "dateTimePicker1";
             dateTimePicker1.Size = new Size(214, 23);
-            dateTimePicker1.TabIndex = 20;
+            dateTimePicker1.TabIndex = 22;
             // 
             // lblUnidadMedida
             // 
             lblUnidadMedida.AutoSize = true;
-            lblUnidadMedida.Location = new Point(188, 298);
+            lblUnidadMedida.Location = new Point(188, 328);
             lblUnidadMedida.Name = "lblUnidadMedida";
-            lblUnidadMedida.Size = new Size(104, 15);
-            lblUnidadMedida.TabIndex = 21;
-            lblUnidadMedida.Text = "Unidad de Medida";
+            lblUnidadMedida.Size = new Size(95, 15);
+            lblUnidadMedida.TabIndex = 23;
+            lblUnidadMedida.Text = "Longitud (valor):";
             // 
-            // comboBoxUnidadMedida
+            // textBoxUnidadMedida
             // 
-            comboBoxUnidadMedida.FormattingEnabled = true;
-            comboBoxUnidadMedida.Location = new Point(394, 296);
-            comboBoxUnidadMedida.Margin = new Padding(3, 2, 3, 2);
-            comboBoxUnidadMedida.Name = "comboBoxUnidadMedida";
-            comboBoxUnidadMedida.Size = new Size(110, 23);
-            comboBoxUnidadMedida.TabIndex = 22;
+            textBoxUnidadMedida.Location = new Point(294, 325);
+            textBoxUnidadMedida.Margin = new Padding(3, 2, 3, 2);
+            textBoxUnidadMedida.Name = "textBoxUnidadMedida";
+            textBoxUnidadMedida.PlaceholderText = "Ej: 10.5";
+            textBoxUnidadMedida.Size = new Size(80, 23);
+            textBoxUnidadMedida.TabIndex = 24;
+            // 
+            // lblAbrevLongitud
+            // 
+            lblAbrevLongitud.AutoSize = true;
+            lblAbrevLongitud.Location = new Point(380, 328);
+            lblAbrevLongitud.Name = "lblAbrevLongitud";
+            lblAbrevLongitud.Size = new Size(41, 15);
+            lblAbrevLongitud.TabIndex = 25;
+            lblAbrevLongitud.Text = "Abrev:";
+            // 
+            // textBoxAbrevLongitud
+            // 
+            textBoxAbrevLongitud.Location = new Point(424, 325);
+            textBoxAbrevLongitud.Margin = new Padding(3, 2, 3, 2);
+            textBoxAbrevLongitud.Name = "textBoxAbrevLongitud";
+            textBoxAbrevLongitud.PlaceholderText = "Ej: cm";
+            textBoxAbrevLongitud.Size = new Size(80, 23);
+            textBoxAbrevLongitud.TabIndex = 26;
+            // 
+            // lblPeso
+            // 
+            lblPeso.AutoSize = true;
+            lblPeso.Location = new Point(188, 354);
+            lblPeso.Name = "lblPeso";
+            lblPeso.Size = new Size(72, 15);
+            lblPeso.TabIndex = 27;
+            lblPeso.Text = "Peso (valor):";
+            // 
+            // textBoxPeso
+            // 
+            textBoxPeso.Location = new Point(294, 351);
+            textBoxPeso.Margin = new Padding(3, 2, 3, 2);
+            textBoxPeso.Name = "textBoxPeso";
+            textBoxPeso.PlaceholderText = "Ej: 2.5";
+            textBoxPeso.Size = new Size(80, 23);
+            textBoxPeso.TabIndex = 28;
+            // 
+            // lblAbrevPeso
+            // 
+            lblAbrevPeso.AutoSize = true;
+            lblAbrevPeso.Location = new Point(380, 354);
+            lblAbrevPeso.Name = "lblAbrevPeso";
+            lblAbrevPeso.Size = new Size(41, 15);
+            lblAbrevPeso.TabIndex = 29;
+            lblAbrevPeso.Text = "Abrev:";
+            // 
+            // textBoxAbrevPeso
+            // 
+            textBoxAbrevPeso.Location = new Point(424, 351);
+            textBoxAbrevPeso.Margin = new Padding(3, 2, 3, 2);
+            textBoxAbrevPeso.Name = "textBoxAbrevPeso";
+            textBoxAbrevPeso.PlaceholderText = "Ej: kg";
+            textBoxAbrevPeso.Size = new Size(80, 23);
+            textBoxAbrevPeso.TabIndex = 30;
             // 
             // lblProveedor
             // 
             lblProveedor.AutoSize = true;
-            lblProveedor.Location = new Point(188, 322);
+            lblProveedor.Location = new Point(188, 380);
             lblProveedor.Name = "lblProveedor";
-            lblProveedor.Size = new Size(61, 15);
-            lblProveedor.TabIndex = 23;
-            lblProveedor.Text = "Proveedor";
+            lblProveedor.Size = new Size(119, 15);
+            lblProveedor.TabIndex = 31;
+            lblProveedor.Text = "Proveedor (Nombre):";
             // 
-            // comboBoxProveedor
+            // textBoxProveedorNombre
             // 
-            comboBoxProveedor.FormattingEnabled = true;
-            comboBoxProveedor.Location = new Point(394, 320);
-            comboBoxProveedor.Margin = new Padding(3, 2, 3, 2);
-            comboBoxProveedor.Name = "comboBoxProveedor";
-            comboBoxProveedor.Size = new Size(110, 23);
-            comboBoxProveedor.TabIndex = 24;
+            textBoxProveedorNombre.Location = new Point(300, 376);
+            textBoxProveedorNombre.Margin = new Padding(3, 2, 3, 2);
+            textBoxProveedorNombre.Name = "textBoxProveedorNombre";
+            textBoxProveedorNombre.PlaceholderText = "Ej: Distribuidora XYZ";
+            textBoxProveedorNombre.Size = new Size(210, 23);
+            textBoxProveedorNombre.TabIndex = 32;
             // 
             // lblTipoServicioProducto
             // 
             lblTipoServicioProducto.AutoSize = true;
-            lblTipoServicioProducto.Location = new Point(188, 348);
+            lblTipoServicioProducto.Location = new Point(188, 406);
             lblTipoServicioProducto.Name = "lblTipoServicioProducto";
-            lblTipoServicioProducto.Size = new Size(162, 15);
-            lblTipoServicioProducto.TabIndex = 25;
-            lblTipoServicioProducto.Text = "Tipo de Servicio del Producto";
+            lblTipoServicioProducto.Size = new Size(63, 15);
+            lblTipoServicioProducto.TabIndex = 33;
+            lblTipoServicioProducto.Text = "Tipo (S/B):";
             // 
-            // comboBoxTipoServicioProducto
+            // textBoxTipoServicioTipo
             // 
-            comboBoxTipoServicioProducto.FormattingEnabled = true;
-            comboBoxTipoServicioProducto.Location = new Point(394, 346);
-            comboBoxTipoServicioProducto.Margin = new Padding(3, 2, 3, 2);
-            comboBoxTipoServicioProducto.Name = "comboBoxTipoServicioProducto";
-            comboBoxTipoServicioProducto.Size = new Size(110, 23);
-            comboBoxTipoServicioProducto.TabIndex = 26;
+            textBoxTipoServicioTipo.Location = new Point(294, 403);
+            textBoxTipoServicioTipo.Margin = new Padding(3, 2, 3, 2);
+            textBoxTipoServicioTipo.Name = "textBoxTipoServicioTipo";
+            textBoxTipoServicioTipo.PlaceholderText = "Servicio o Bien";
+            textBoxTipoServicioTipo.Size = new Size(120, 23);
+            textBoxTipoServicioTipo.TabIndex = 34;
             // 
             // labelCategoria
             // 
             labelCategoria.AutoSize = true;
-            labelCategoria.Location = new Point(188, 374);
+            labelCategoria.Location = new Point(188, 432);
             labelCategoria.Name = "labelCategoria";
             labelCategoria.Size = new Size(58, 15);
-            labelCategoria.TabIndex = 27;
+            labelCategoria.TabIndex = 35;
             labelCategoria.Text = "Categoria";
             // 
-            // comboBoxCategoria
+            // textBoxCategoria
             // 
-            comboBoxCategoria.FormattingEnabled = true;
-            comboBoxCategoria.Location = new Point(394, 372);
-            comboBoxCategoria.Margin = new Padding(3, 2, 3, 2);
-            comboBoxCategoria.Name = "comboBoxCategoria";
-            comboBoxCategoria.Size = new Size(110, 23);
-            comboBoxCategoria.TabIndex = 28;
-            comboBoxCategoria.SelectedIndexChanged += comboBoxCategoria_SelectedIndexChanged;
+            textBoxCategoria.Location = new Point(294, 429);
+            textBoxCategoria.Margin = new Padding(3, 2, 3, 2);
+            textBoxCategoria.Name = "textBoxCategoria";
+            textBoxCategoria.PlaceholderText = "Ej: Electrónicos";
+            textBoxCategoria.Size = new Size(150, 23);
+            textBoxCategoria.TabIndex = 36;
             // 
             // labelStock
             // 
             labelStock.AutoSize = true;
-            labelStock.Location = new Point(188, 398);
+            labelStock.Location = new Point(188, 458);
             labelStock.Name = "labelStock";
             labelStock.Size = new Size(95, 15);
-            labelStock.TabIndex = 29;
+            labelStock.TabIndex = 37;
             labelStock.Text = "Stock Disponible";
             // 
             // textBoxStock
             // 
-            textBoxStock.BackColor = SystemColors.Window;
-            textBoxStock.Enabled = true;
-            textBoxStock.Location = new Point(394, 396);
+            textBoxStock.Location = new Point(294, 455);
             textBoxStock.Name = "textBoxStock";
-            textBoxStock.ReadOnly = false;
-            textBoxStock.Size = new Size(110, 23);
-            textBoxStock.TabIndex = 30;
+            textBoxStock.PlaceholderText = "Ej: 100";
+            textBoxStock.Size = new Size(80, 23);
+            textBoxStock.TabIndex = 38;
             // 
             // labelImagen
             // 
@@ -359,16 +418,18 @@
             labelImagen.Location = new Point(546, 125);
             labelImagen.Name = "labelImagen";
             labelImagen.Size = new Size(47, 15);
-            labelImagen.TabIndex = 31;
+            labelImagen.TabIndex = 39;
             labelImagen.Text = "Imagen";
             // 
             // pictureBoxImagen
             // 
+            pictureBoxImagen.BorderStyle = BorderStyle.FixedSingle;
             pictureBoxImagen.Location = new Point(546, 149);
             pictureBoxImagen.Margin = new Padding(3, 2, 3, 2);
             pictureBoxImagen.Name = "pictureBoxImagen";
             pictureBoxImagen.Size = new Size(134, 120);
-            pictureBoxImagen.TabIndex = 32;
+            pictureBoxImagen.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBoxImagen.TabIndex = 40;
             pictureBoxImagen.TabStop = false;
             // 
             // buttonImagen
@@ -377,7 +438,7 @@
             buttonImagen.Margin = new Padding(3, 2, 3, 2);
             buttonImagen.Name = "buttonImagen";
             buttonImagen.Size = new Size(125, 32);
-            buttonImagen.TabIndex = 33;
+            buttonImagen.TabIndex = 41;
             buttonImagen.Text = "Cargar Imagen";
             buttonImagen.UseVisualStyleBackColor = true;
             buttonImagen.Click += buttonImagen_Click;
@@ -386,19 +447,25 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(700, 450);
+            ClientSize = new Size(700, 550);
             Controls.Add(buttonImagen);
             Controls.Add(pictureBoxImagen);
             Controls.Add(labelImagen);
             Controls.Add(textBoxStock);
             Controls.Add(labelStock);
-            Controls.Add(comboBoxCategoria);
+            Controls.Add(textBoxCategoria);
             Controls.Add(labelCategoria);
-            Controls.Add(comboBoxTipoServicioProducto);
+            Controls.Add(textBoxTipoServicioTipo);
             Controls.Add(lblTipoServicioProducto);
-            Controls.Add(comboBoxProveedor);
+            Controls.Add(textBoxProveedorNombre);
             Controls.Add(lblProveedor);
-            Controls.Add(comboBoxUnidadMedida);
+            Controls.Add(textBoxAbrevPeso);
+            Controls.Add(lblAbrevPeso);
+            Controls.Add(textBoxPeso);
+            Controls.Add(lblPeso);
+            Controls.Add(textBoxAbrevLongitud);
+            Controls.Add(lblAbrevLongitud);
+            Controls.Add(textBoxUnidadMedida);
             Controls.Add(lblUnidadMedida);
             Controls.Add(dateTimePicker1);
             Controls.Add(labelFecha);
@@ -410,9 +477,9 @@
             Controls.Add(labelDescripcion);
             Controls.Add(txtBoxNombreProducto);
             Controls.Add(lblNombreProducto);
+            Controls.Add(txtBoxCodigoProducto);
+            Controls.Add(lblCodigoProducto);
             Controls.Add(buttonBuscar);
-            Controls.Add(textBoxCategoriaProductoBU);
-            Controls.Add(lblCategoriaProductoBU);
             Controls.Add(textBoxNombreProductoBU);
             Controls.Add(lblNombreProductoBU);
             Controls.Add(txtBoxCodigoProductoB);
@@ -439,12 +506,12 @@
         private Label lblCodigoProductoB;
         private TextBox txtBoxCodigoProductoB;
         private Label lblNombreProductoBU;
-        private TextBox textBoxNombreProductoBU; // ✅ CAMPO DE BÚSQUEDA
-        private Label lblCategoriaProductoBU;
-        private TextBox textBoxCategoriaProductoBU;
+        private TextBox textBoxNombreProductoBU;
         private Button buttonBuscar;
-        private Label lblNombreProducto; // Campo de RESULTADO
-        private TextBox txtBoxNombreProducto; // Campo de RESULTADO
+        private Label lblCodigoProducto;
+        private TextBox txtBoxCodigoProducto;
+        private Label lblNombreProducto;
+        private TextBox txtBoxNombreProducto;
         private Label labelDescripcion;
         private TextBox textBoxDescripcion;
         private Label labelCostoUnitario;
@@ -454,13 +521,19 @@
         private Label labelFecha;
         private DateTimePicker dateTimePicker1;
         private Label lblUnidadMedida;
-        private ComboBox comboBoxUnidadMedida;
+        private TextBox textBoxUnidadMedida; // ✅ TEXTBOX
+        private Label lblAbrevLongitud;
+        private TextBox textBoxAbrevLongitud;
+        private Label lblPeso;
+        private TextBox textBoxPeso;
+        private Label lblAbrevPeso;
+        private TextBox textBoxAbrevPeso;
         private Label lblProveedor;
-        private ComboBox comboBoxProveedor;
+        private TextBox textBoxProveedorNombre; // ✅ TEXTBOX
         private Label lblTipoServicioProducto;
-        private ComboBox comboBoxTipoServicioProducto;
+        private TextBox textBoxTipoServicioTipo; // ✅ TEXTBOX
         private Label labelCategoria;
-        private ComboBox comboBoxCategoria;
+        private TextBox textBoxCategoria; // ✅ TEXTBOX
         private Label labelStock;
         private TextBox textBoxStock;
         private Label labelImagen;

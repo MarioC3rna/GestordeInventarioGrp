@@ -8,7 +8,7 @@ namespace Proyecto_Base_de_Datos
 {
     public partial class EliminarForm : Form
     {
-        private string connectionString = "Data Source=192.168.116.129\\MYISTANCE;Initial Catalog=Db_EmpresaDev;User ID=admin_inventario;Password=Adm!n2025$;Encrypt=True;TrustServerCertificate=True;";
+        private string connectionString = "Data Source=SRV-BD\\MYISTANCE;Initial Catalog=Db_EmpresaDev;User ID=admin_inventario;Password=Adm!n2025$;Encrypt=True;TrustServerCertificate=True;";
 
         public EliminarForm()
         {

@@ -29,7 +29,7 @@ namespace Proyecto_Base_de_Datos
             }
 
             // 🔹 Cadena de conexión usando SQL Server Authentication
-            string connectionString = $"Data Source=192.168.116.129\\MYISTANCE;Initial Catalog=Db_EmpresaDev;User ID={usuario};Password={contraseña};Encrypt=True;TrustServerCertificate=True;";
+            string connectionString = $"Data Source=SRV-BD\\MYISTANCE;Initial Catalog=Db_EmpresaDev;User ID={usuario};Password={contraseña};Encrypt=True;TrustServerCertificate=True;";
 
 
 

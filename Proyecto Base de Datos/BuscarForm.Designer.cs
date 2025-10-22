@@ -36,8 +36,6 @@
             buttonBuscar = new Button();
             lblNombreProductoBU = new Label();
             textBoxNombreProductoBU = new TextBox();
-            lblCategoriaProductoBU = new Label();
-            textBoxCategoriaProductoBU = new TextBox();
             lblStockBU = new Label();
             lblCostoBU = new Label();
             lblTipoServicioBU = new Label();
@@ -111,7 +109,7 @@
             // 
             // buttonBuscar
             // 
-            buttonBuscar.Location = new Point(341, 133);
+            buttonBuscar.Location = new Point(341, 110);
             buttonBuscar.Margin = new Padding(3, 2, 3, 2);
             buttonBuscar.Name = "buttonBuscar";
             buttonBuscar.Size = new Size(82, 22);
@@ -137,27 +135,10 @@
             textBoxNombreProductoBU.Size = new Size(110, 23);
             textBoxNombreProductoBU.TabIndex = 10;
             // 
-            // lblCategoriaProductoBU
-            // 
-            lblCategoriaProductoBU.AutoSize = true;
-            lblCategoriaProductoBU.Location = new Point(180, 105);
-            lblCategoriaProductoBU.Name = "lblCategoriaProductoBU";
-            lblCategoriaProductoBU.Size = new Size(129, 15);
-            lblCategoriaProductoBU.TabIndex = 13;
-            lblCategoriaProductoBU.Text = "Categoria del Producto";
-            // 
-            // textBoxCategoriaProductoBU
-            // 
-            textBoxCategoriaProductoBU.Location = new Point(327, 103);
-            textBoxCategoriaProductoBU.Margin = new Padding(3, 2, 3, 2);
-            textBoxCategoriaProductoBU.Name = "textBoxCategoriaProductoBU";
-            textBoxCategoriaProductoBU.Size = new Size(110, 23);
-            textBoxCategoriaProductoBU.TabIndex = 12;
-            // 
             // lblStockBU
             // 
             lblStockBU.AutoSize = true;
-            lblStockBU.Location = new Point(188, 173);
+            lblStockBU.Location = new Point(188, 150);
             lblStockBU.Name = "lblStockBU";
             lblStockBU.Size = new Size(36, 15);
             lblStockBU.TabIndex = 14;
@@ -166,7 +147,7 @@
             // lblCostoBU
             // 
             lblCostoBU.AutoSize = true;
-            lblCostoBU.Location = new Point(188, 198);
+            lblCostoBU.Location = new Point(188, 175);
             lblCostoBU.Name = "lblCostoBU";
             lblCostoBU.Size = new Size(38, 15);
             lblCostoBU.TabIndex = 15;
@@ -175,7 +156,7 @@
             // lblTipoServicioBU
             // 
             lblTipoServicioBU.AutoSize = true;
-            lblTipoServicioBU.Location = new Point(188, 224);
+            lblTipoServicioBU.Location = new Point(188, 201);
             lblTipoServicioBU.Name = "lblTipoServicioBU";
             lblTipoServicioBU.Size = new Size(162, 15);
             lblTipoServicioBU.TabIndex = 16;
@@ -184,7 +165,7 @@
             // lblProveedorBU
             // 
             lblProveedorBU.AutoSize = true;
-            lblProveedorBU.Location = new Point(188, 250);
+            lblProveedorBU.Location = new Point(188, 227);
             lblProveedorBU.Name = "lblProveedorBU";
             lblProveedorBU.Size = new Size(61, 15);
             lblProveedorBU.TabIndex = 17;
@@ -193,7 +174,7 @@
             // lblDescuentoBU
             // 
             lblDescuentoBU.AutoSize = true;
-            lblDescuentoBU.Location = new Point(188, 274);
+            lblDescuentoBU.Location = new Point(188, 251);
             lblDescuentoBU.Name = "lblDescuentoBU";
             lblDescuentoBU.Size = new Size(63, 15);
             lblDescuentoBU.TabIndex = 18;
@@ -202,7 +183,7 @@
             // lblDescripcionBU
             // 
             lblDescripcionBU.AutoSize = true;
-            lblDescripcionBU.Location = new Point(188, 298);
+            lblDescripcionBU.Location = new Point(188, 275);
             lblDescripcionBU.Name = "lblDescripcionBU";
             lblDescripcionBU.Size = new Size(69, 15);
             lblDescripcionBU.TabIndex = 19;
@@ -212,7 +193,7 @@
             // 
             textBoxStockBU.BackColor = Color.LightGray;
             textBoxStockBU.Enabled = false;
-            textBoxStockBU.Location = new Point(394, 173);
+            textBoxStockBU.Location = new Point(394, 150);
             textBoxStockBU.Margin = new Padding(3, 2, 3, 2);
             textBoxStockBU.Name = "textBoxStockBU";
             textBoxStockBU.ReadOnly = true;
@@ -221,7 +202,7 @@
             // 
             // textBoxCostoBU
             // 
-            textBoxCostoBU.Location = new Point(394, 198);
+            textBoxCostoBU.Location = new Point(394, 175);
             textBoxCostoBU.Margin = new Padding(3, 2, 3, 2);
             textBoxCostoBU.Name = "textBoxCostoBU";
             textBoxCostoBU.Size = new Size(110, 23);
@@ -229,7 +210,7 @@
             // 
             // textBoxTipoServicioBU
             // 
-            textBoxTipoServicioBU.Location = new Point(394, 224);
+            textBoxTipoServicioBU.Location = new Point(394, 201);
             textBoxTipoServicioBU.Margin = new Padding(3, 2, 3, 2);
             textBoxTipoServicioBU.Name = "textBoxTipoServicioBU";
             textBoxTipoServicioBU.Size = new Size(110, 23);
@@ -237,7 +218,7 @@
             // 
             // textBoxProveedorBU
             // 
-            textBoxProveedorBU.Location = new Point(394, 248);
+            textBoxProveedorBU.Location = new Point(394, 225);
             textBoxProveedorBU.Margin = new Padding(3, 2, 3, 2);
             textBoxProveedorBU.Name = "textBoxProveedorBU";
             textBoxProveedorBU.Size = new Size(110, 23);
@@ -245,7 +226,7 @@
             // 
             // textBoxDescuentoBU
             // 
-            textBoxDescuentoBU.Location = new Point(394, 272);
+            textBoxDescuentoBU.Location = new Point(394, 249);
             textBoxDescuentoBU.Margin = new Padding(3, 2, 3, 2);
             textBoxDescuentoBU.Name = "textBoxDescuentoBU";
             textBoxDescuentoBU.Size = new Size(110, 23);
@@ -253,10 +234,10 @@
             // 
             // textBoxDescripcionBU
             // 
-            textBoxDescripcionBU.Location = new Point(394, 296);
+            textBoxDescripcionBU.Location = new Point(341, 273);
             textBoxDescripcionBU.Margin = new Padding(3, 2, 3, 2);
             textBoxDescripcionBU.Name = "textBoxDescripcionBU";
-            textBoxDescripcionBU.Size = new Size(110, 23);
+            textBoxDescripcionBU.Size = new Size(217, 23);
             textBoxDescripcionBU.TabIndex = 25;
             // 
             // pictureBoxBuscarForm
@@ -307,8 +288,6 @@
             Controls.Add(lblTipoServicioBU);
             Controls.Add(lblCostoBU);
             Controls.Add(lblStockBU);
-            Controls.Add(lblCategoriaProductoBU);
-            Controls.Add(textBoxCategoriaProductoBU);
             Controls.Add(lblNombreProductoBU);
             Controls.Add(textBoxNombreProductoBU);
             Controls.Add(buttonBuscar);
@@ -336,8 +315,6 @@
         private Button buttonAtrasBUS;
         private Label lblNombreProductoBU;
         private TextBox textBoxNombreProductoBU;
-        private Label lblCategoriaProductoBU;
-        private TextBox textBoxCategoriaProductoBU;
         private Label lblStockBU;
         private Label lblCostoBU;
         private Label lblTipoServicioBU;

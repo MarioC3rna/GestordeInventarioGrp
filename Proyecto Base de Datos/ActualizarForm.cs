@@ -14,444 +14,578 @@ namespace Proyecto_Base_de_Datos
 {
     public partial class ActualizarForm : Form
     {
+private int productoIdActual = -1;
+      private string codigoProductoActual = "";
+   private string rutaImagenAnterior = "";
+      
+// ✅ IDs actuales de las tablas relacionadas
+        private int unidadMedidaIdActual = -1;
+      private int proveedorIdActual = -1;
+        private int servicioBienIdActual = -1;
+        private int categoriaIdActual = -1;
 
-        private string connectionString = "Data Source=192.168.116.129\\MYISTANCE;Initial Catalog=Db_EmpresaDev;User ID=admin_inventario;Password=Adm!n2025$;Encrypt=True;TrustServerCertificate=True;";
-        private int productoIdActual = -1;
-
-   public ActualizarForm()
-        {
-            InitializeComponent();
-        }
-
-        private void ActualizarForm_Load(object sender, EventArgs e)
-        {
-     // Cargar ComboBox
-            CargarComboBox(comboBoxUnidadMedida, "Invt.Tb_UnidadMedidas", "UnidadMedida_Id", "UnidadMedida_Longitud");
-            CargarComboBox(comboBoxProveedor, "Invt.Tb_Proveedores", "Proveedor_Id", "Proveedor_Nombre");
-        CargarComboBox(comboBoxTipoServicioProducto, "Invt.Tb_ServiciosBienes", "ServicioBien_Id", "ServicioBien_Nombre");
-            CargarComboBox(comboBoxCategoria, "Invt.Tb_Categorias", "Categoria_Id", "Categoria_Nombre");
-
-  comboBoxUnidadMedida.DropDownStyle = ComboBoxStyle.DropDownList;
-   comboBoxProveedor.DropDownStyle = ComboBoxStyle.DropDownList;
-      comboBoxTipoServicioProducto.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBoxCategoria.DropDownStyle = ComboBoxStyle.DropDownList;
-
-      DeshabilitarCampos();
-        }
-
-        private void CargarComboBox(ComboBox combo, string tabla, string idCol, string nombreCol)
-        {
-            try
-   {
-using (SqlConnection connection = new SqlConnection(connectionString))
-      {
-         string query = $"SELECT {idCol}, {nombreCol} FROM {tabla}";
-    SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
-             DataTable data = new DataTable();
-   adapter.Fill(data);
-
-   combo.DataSource = data;
-        combo.DisplayMember = nombreCol;
-     combo.ValueMember = idCol;
-                    combo.SelectedIndex = -1;
-   }
+        public ActualizarForm()
+    {
+    InitializeComponent();
   }
-            catch (Exception ex)
-            {
- MessageBox.Show("❌ Error al cargar datos: " + ex.Message);
-            }
-        }
 
- private void DeshabilitarCampos()
+   private void ActualizarForm_Load(object sender, EventArgs e)
         {
-            txtBoxNombreProducto.Enabled = false;
-    textBoxDescripcion.Enabled = false;
-            textBoxCostoUnitario.Enabled = false;
-            textBoxDescuento.Enabled = false;
-            dateTimePicker1.Enabled = false;
-     comboBoxUnidadMedida.Enabled = false;
-            comboBoxProveedor.Enabled = false;
-        comboBoxTipoServicioProducto.Enabled = false;
-            comboBoxCategoria.Enabled = false;
-            buttonImagen.Enabled = false;
-   textBoxStock.Enabled = false; // ✅ Agregar control del stock
-   btnACTUALIZAR.Enabled = false;
-        }
+       // ✅ Ya no necesitamos cargar ComboBox
+      DeshabilitarCampos();
+    }
 
-    private void HabilitarCampos()
+   private void DeshabilitarCampos()
+  {
+  txtBoxCodigoProducto.Enabled = false;
+       txtBoxNombreProducto.Enabled = false;
+  textBoxDescripcion.Enabled = false;
+       textBoxCostoUnitario.Enabled = false;
+   textBoxDescuento.Enabled = false;
+   dateTimePicker1.Enabled = false;
+ textBoxUnidadMedida.Enabled = false;
+     textBoxAbrevLongitud.Enabled = false;
+textBoxPeso.Enabled = false;
+          textBoxAbrevPeso.Enabled = false;
+            textBoxProveedorNombre.Enabled = false;
+      textBoxTipoServicioTipo.Enabled = false;
+  textBoxCategoria.Enabled = false;
+buttonImagen.Enabled = false;
+textBoxStock.Enabled = false;
+      btnACTUALIZAR.Enabled = false;
+   }
+
+     private void HabilitarCampos()
         {
-txtBoxNombreProducto.Enabled = true;
-            textBoxDescripcion.Enabled = true;
-      textBoxCostoUnitario.Enabled = true;
-    textBoxDescuento.Enabled = true;
-            dateTimePicker1.Enabled = true;
-     comboBoxUnidadMedida.Enabled = true;
-    comboBoxProveedor.Enabled = true;
-   comboBoxTipoServicioProducto.Enabled = true;
-        comboBoxCategoria.Enabled = true;
-  buttonImagen.Enabled = true;
-    textBoxStock.Enabled = true; // ✅ Habilitar edición del stock
- btnACTUALIZAR.Enabled = true;
-        }
+            txtBoxCodigoProducto.Enabled = true;
+  txtBoxNombreProducto.Enabled = true;
+       textBoxDescripcion.Enabled = true;
+       textBoxCostoUnitario.Enabled = true;
+          textBoxDescuento.Enabled = true;
+       dateTimePicker1.Enabled = true;
+            textBoxUnidadMedida.Enabled = true;
+       textBoxAbrevLongitud.Enabled = true;
+    textBoxPeso.Enabled = true;
+          textBoxAbrevPeso.Enabled = true;
+       textBoxProveedorNombre.Enabled = true;
+textBoxTipoServicioTipo.Enabled = true;
+  textBoxCategoria.Enabled = true;
+        buttonImagen.Enabled = true;
+     textBoxStock.Enabled = true;
+    btnACTUALIZAR.Enabled = true;
+    }
 
         private void buttonBuscar_Click(object sender, EventArgs e)
-        {
-  // 🔹 Obtener criterios de búsqueda de los campos CORRECTOS
-            string codigoProducto = txtBoxCodigoProductoB.Text.Trim();
-            string nombreProducto = textBoxNombreProductoBU.Text.Trim(); // ✅ AHORA ES CORRECTO
-            string categoriaProducto = textBoxCategoriaProductoBU.Text.Trim();
+  {
+      string codigoProducto = txtBoxCodigoProductoB.Text.Trim();
+  string nombreProducto = textBoxNombreProductoBU.Text.Trim();
 
-            // 🔹 Validar que al menos haya algo escrito
-  if (string.IsNullOrEmpty(codigoProducto) && string.IsNullOrEmpty(nombreProducto) && string.IsNullOrEmpty(categoriaProducto))
-            {
-       MessageBox.Show("Por favor ingresa el código, nombre o categoría del producto.", "Advertencia",
-              MessageBoxButtons.OK, MessageBoxIcon.Warning);
-         return;
-            }
+      if (string.IsNullOrEmpty(codigoProducto) && string.IsNullOrEmpty(nombreProducto))
+{
+        MessageBox.Show("Por favor ingresa el código o nombre del producto.", "Advertencia",
+               MessageBoxButtons.OK, MessageBoxIcon.Warning);
+    return;
+   }
 
- // 🔹 Limpiar campos de resultados
-            LimpiarCamposResultados();
+      LimpiarCamposResultados();
 
-  // 🔹 Consulta SQL - CORREGIDA para ser consistente con BuscarForm
-   string query = @"
-        SELECT 
-            P.Producto_Id,
-      P.Producto_Codigo,
-   P.Producto_Nombre,
-         P.Producto_Descripcion,
+// ✅ Consulta extendida con datos de unidad de medida completa
+    string query = @"
+     SELECT 
+   P.Producto_Id,
+ P.Producto_Codigo,
+    P.Producto_Nombre,
+P.Producto_Descripcion,
        P.Producto_CostoUnitario,
-            P.Producto_Descuento,
-            P.Producto_FechaIngreso,
-   P.UnidadMedida_Id,
-            P.Proveedor_Id,
-            P.ServicioBien_Id,
-   P.Categoria_Id,
-       P.Producto_Imagen,
-    UM.UnidadMedida_Longitud AS UnidadMedida,
-    PR.Proveedor_Nombre AS Proveedor,
-    SB.ServicioBien_Nombre AS ServicioBien,
-   C.Categoria_Nombre AS Categoria,
-            ISNULL(SUM(I.Cantidad_Disponible), 0) AS Stock_Total
-     FROM Invt.Tb_Productos P
-      INNER JOIN Invt.Tb_UnidadMedidas UM ON P.UnidadMedida_Id = UM.UnidadMedida_Id
-        INNER JOIN Invt.Tb_Proveedores PR ON P.Proveedor_Id = PR.Proveedor_Id
-        INNER JOIN Invt.Tb_ServiciosBienes SB ON P.ServicioBien_Id = SB.ServicioBien_Id
-        INNER JOIN Invt.Tb_Categorias C ON P.Categoria_Id = C.Categoria_Id
-        LEFT JOIN Invt.Tb_Inventario I ON P.Producto_Id = I.Producto_Id
-      WHERE (P.Producto_Codigo = @Codigo 
-               OR P.Producto_Nombre = @Nombre 
-  OR C.Categoria_Nombre = @Categoria)
-        GROUP BY 
- P.Producto_Id, P.Producto_Codigo, P.Producto_Nombre,
- P.Producto_Descripcion, P.Producto_CostoUnitario,
-            P.Producto_Descuento, P.Producto_FechaIngreso,
-   P.UnidadMedida_Id, P.Proveedor_Id, P.ServicioBien_Id,
-            P.Categoria_Id, P.Producto_Imagen, UM.UnidadMedida_Longitud,
-        PR.Proveedor_Nombre, SB.ServicioBien_Nombre, C.Categoria_Nombre";
+     P.Producto_Descuento,
+        P.Producto_FechaIngreso,
+        P.UnidadMedida_Id,
+  P.Proveedor_Id,
+         P.ServicioBien_Id,
+       P.Categoria_Id,
+      P.Producto_ImagenRuta,
+UM.UnidadMedida_Longitud,
+      UM.UnidadMedida_AbrevLongitud,
+         UM.UnidadMedida_Peso,
+                UM.UnidadMedida_AbrevPeso,
+PR.Proveedor_Nombre,
+SB.ServicioBien_Tipo,
+      C.Categoria_Nombre,
+             ISNULL(SUM(I.Cantidad_Disponible), 0) AS Stock_Total
+FROM Invt.Tb_Productos P
+            INNER JOIN Invt.Tb_UnidadMedidas UM ON P.UnidadMedida_Id = UM.UnidadMedida_Id
+     INNER JOIN Invt.Tb_Proveedores PR ON P.Proveedor_Id = PR.Proveedor_Id
+      INNER JOIN Invt.Tb_ServiciosBienes SB ON P.ServicioBien_Id = SB.ServicioBien_Id
+       INNER JOIN Invt.Tb_Categorias C ON P.Categoria_Id = C.Categoria_Id
+      LEFT JOIN Invt.Tb_Inventario I ON P.Producto_Id = I.Producto_Id
+     WHERE (P.Producto_Codigo = @Codigo OR P.Producto_Nombre = @Nombre)
+GROUP BY 
+  P.Producto_Id, P.Producto_Codigo, P.Producto_Nombre,
+   P.Producto_Descripcion, P.Producto_CostoUnitario,
+ P.Producto_Descuento, P.Producto_FechaIngreso,
+     P.UnidadMedida_Id, P.Proveedor_Id, P.ServicioBien_Id,
+                P.Categoria_Id, P.Producto_ImagenRuta,
+  UM.UnidadMedida_Longitud, UM.UnidadMedida_AbrevLongitud,
+         UM.UnidadMedida_Peso, UM.UnidadMedida_AbrevPeso,
+       PR.Proveedor_Nombre, SB.ServicioBien_Tipo, C.Categoria_Nombre";
 
-    using (SqlConnection connection = new SqlConnection(connectionString))
-    using (SqlCommand command = new SqlCommand(query, connection))
-    {
-        command.Parameters.AddWithValue("@Codigo", codigoProducto);
-    command.Parameters.AddWithValue("@Nombre", nombreProducto);
- command.Parameters.AddWithValue("@Categoria", categoriaProducto);
-
-        try
-        {
-     connection.Open();
-            SqlDataReader reader = command.ExecuteReader();
-
-            if (reader.Read())
+            using (var connection = DatabaseConnection.CreateConnection())
+         using (var command = new SqlCommand(query, connection))
       {
-       // ✅ Almacenar ID del producto para actualización
-                productoIdActual = Convert.ToInt32(reader["Producto_Id"]);
+    command.Parameters.AddWithValue("@Codigo", codigoProducto);
+       command.Parameters.AddWithValue("@Nombre", nombreProducto);
 
-                // ✅ Llenar campos con datos encontrados
-         txtBoxNombreProducto.Text = reader["Producto_Nombre"].ToString();
-      textBoxDescripcion.Text = reader["Producto_Descripcion"].ToString();
-                textBoxCostoUnitario.Text = reader["Producto_CostoUnitario"].ToString();
-     textBoxDescuento.Text = reader["Producto_Descuento"].ToString();
-         dateTimePicker1.Value = Convert.ToDateTime(reader["Producto_FechaIngreso"]);
+             try
+     {
+      connection.Open();
+       var reader = command.ExecuteReader();
 
-  // ✅ Mostrar stock disponible
-     textBoxStock.Text = reader["Stock_Total"].ToString();
+       if (reader.Read())
+       {
+           productoIdActual = Convert.ToInt32(reader["Producto_Id"]);
+    codigoProductoActual = reader["Producto_Codigo"].ToString();
 
-                // ✅ Seleccionar valores en ComboBoxes
-    comboBoxUnidadMedida.SelectedValue = reader["UnidadMedida_Id"];
-    comboBoxProveedor.SelectedValue = reader["Proveedor_Id"];
-     comboBoxTipoServicioProducto.SelectedValue = reader["ServicioBien_Id"];
-         comboBoxCategoria.SelectedValue = reader["Categoria_Id"];
+            // ✅ Guardar IDs actuales
+ unidadMedidaIdActual = Convert.ToInt32(reader["UnidadMedida_Id"]);
+          proveedorIdActual = Convert.ToInt32(reader["Proveedor_Id"]);
+  servicioBienIdActual = Convert.ToInt32(reader["ServicioBien_Id"]);
+      categoriaIdActual = Convert.ToInt32(reader["Categoria_Id"]);
 
-    // ✅ Cargar imagen si existe
-      if (reader["Producto_Imagen"] != DBNull.Value)
+         // ✅ Llenar campos básicos
+       txtBoxCodigoProducto.Text = reader["Producto_Codigo"].ToString();
+     txtBoxNombreProducto.Text = reader["Producto_Nombre"].ToString();
+           textBoxDescripcion.Text = reader["Producto_Descripcion"].ToString();
+     textBoxCostoUnitario.Text = reader["Producto_CostoUnitario"].ToString();
+            textBoxDescuento.Text = reader["Producto_Descuento"].ToString();
+     dateTimePicker1.Value = Convert.ToDateTime(reader["Producto_FechaIngreso"]);
+                   textBoxStock.Text = reader["Stock_Total"].ToString();
+
+ // ✅ Llenar campos de UNIDAD DE MEDIDA
+                   textBoxUnidadMedida.Text = reader["UnidadMedida_Longitud"].ToString();
+      textBoxAbrevLongitud.Text = reader["UnidadMedida_AbrevLongitud"].ToString();
+  textBoxPeso.Text = reader["UnidadMedida_Peso"].ToString();
+       textBoxAbrevPeso.Text = reader["UnidadMedida_AbrevPeso"].ToString();
+
+          // ✅ Llenar PROVEEDOR
+      textBoxProveedorNombre.Text = reader["Proveedor_Nombre"].ToString();
+
+     // ✅ Llenar TIPO SERVICIO/BIEN
+                  textBoxTipoServicioTipo.Text = reader["ServicioBien_Tipo"].ToString();
+
+// ✅ Llenar CATEGORÍA
+    textBoxCategoria.Text = reader["Categoria_Nombre"].ToString();
+
+           // ✅ Cargar imagen
+         rutaImagenAnterior = "";
+   if (reader["Producto_ImagenRuta"] != DBNull.Value)
+             {
+string rutaImagen = reader["Producto_ImagenRuta"].ToString();
+                if (!string.IsNullOrEmpty(rutaImagen))
+     {
+        rutaImagenAnterior = rutaImagen;
+          Image imagen = ImageHelper.LoadProductImage(rutaImagen);
+ if (imagen != null)
     {
-        byte[] imagenBytes = (byte[])reader["Producto_Imagen"];
-       using (MemoryStream ms = new MemoryStream(imagenBytes))
+      pictureBoxImagen.Image = imagen;
+       pictureBoxImagen.SizeMode = PictureBoxSizeMode.Zoom;
+        }
+     else
+            {
+     pictureBoxImagen.Image = null;
+        }
+          }
+        else
         {
-            pictureBoxImagen.Image = Image.FromStream(ms);
-      pictureBoxImagen.SizeMode = PictureBoxSizeMode.StretchImage;
-       }
-     }
-       else
-      {
-         pictureBoxImagen.Image = null;
-         }
+     pictureBoxImagen.Image = null;
+ }
+      }
+            else
+    {
+          pictureBoxImagen.Image = null;
+      }
 
       MessageBox.Show("✅ Producto encontrado. Puedes modificar los datos.", "Resultado",
-         MessageBoxButtons.OK, MessageBoxIcon.Information);
+        MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-        HabilitarCampos();
-            }
-        else
-       {
-              MessageBox.Show("❌ No se encontró ningún producto con ese criterio.",
-      "Sin resultados", MessageBoxButtons.OK, MessageBoxIcon.Information);
-     DeshabilitarCampos();
-   }
+         HabilitarCampos();
+      }
+          else
+            {
+    MessageBox.Show("❌ No se encontró ningún producto con ese criterio.",
+  "Sin resultados", MessageBoxButtons.OK, MessageBoxIcon.Information);
+          DeshabilitarCampos();
+          }
 
-            reader.Close();
-   }
- catch (Exception ex)
+        reader.Close();
+      }
+  catch (Exception ex)
         {
-     MessageBox.Show("Error al buscar el producto: " + ex.Message,
-         "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
- }
-    }
-}
-
-        private void btnACTUALIZAR_Click(object sender, EventArgs e)
-        {
-  if (productoIdActual == -1)
-  {
-   MessageBox.Show("⚠️ Primero debes buscar un producto.", "Advertencia",
-            MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-    // 🔹 Validar campos obligatorios
-            if (string.IsNullOrWhiteSpace(txtBoxNombreProducto.Text) ||
-     string.IsNullOrWhiteSpace(textBoxDescripcion.Text) ||
-   string.IsNullOrWhiteSpace(textBoxCostoUnitario.Text) ||
-             string.IsNullOrWhiteSpace(textBoxDescuento.Text) ||
-             string.IsNullOrWhiteSpace(textBoxStock.Text) || // ✅ Validar stock
-   comboBoxUnidadMedida.SelectedIndex == -1 ||
-   comboBoxProveedor.SelectedIndex == -1 ||
-         comboBoxTipoServicioProducto.SelectedIndex == -1 ||
-        comboBoxCategoria.SelectedIndex == -1)
-            {
-       MessageBox.Show("⚠️ Todos los campos son obligatorios.", "Advertencia",
-      MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            return;
-       }
-
-         try
-            {
-     // 🔹 Capturar datos para actualización
-    string nombreProducto = txtBoxNombreProducto.Text.Trim();
-        string descripcion = textBoxDescripcion.Text.Trim();
-        decimal costoUnitario = Convert.ToDecimal(textBoxCostoUnitario.Text);
-      decimal descuento = Convert.ToDecimal(textBoxDescuento.Text);
-        int stockDisponible = Convert.ToInt32(textBoxStock.Text); // ✅ Capturar stock
-     DateTime fechaIngreso = dateTimePicker1.Value;
-       int unidadMedidaId = Convert.ToInt32(comboBoxUnidadMedida.SelectedValue);
-   int proveedorId = Convert.ToInt32(comboBoxProveedor.SelectedValue);
- int servicioBienId = Convert.ToInt32(comboBoxTipoServicioProducto.SelectedValue);
-          int categoriaId = Convert.ToInt32(comboBoxCategoria.SelectedValue);
-
- // 🔹 Convertir imagen a bytes
- byte[] imagenBytes = null;
-  if (pictureBoxImagen.Image != null)
-  {
-  using (MemoryStream ms = new MemoryStream())
-            {
-         pictureBoxImagen.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-       imagenBytes = ms.ToArray();
+       MessageBox.Show("Error al buscar el producto: " + ex.Message,
+     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
         }
-         }
+        }
 
-    // 🔹 Actualizar en base de datos usando transacción
-     using (SqlConnection connection = new SqlConnection(connectionString))
+private void btnACTUALIZAR_Click(object sender, EventArgs e)
   {
-    connection.Open();
-            using (SqlTransaction transaction = connection.BeginTransaction())
-   {
-    try
-          {
-                 // ✅ 1. Actualizar tabla de productos
-            string queryProducto = @"
-    UPDATE Invt.Tb_Productos 
-      SET Producto_Nombre = @Nombre,
-            Producto_Descripcion = @Descripcion,
-      Producto_CostoUnitario = @Costo,
-          Producto_Descuento = @Descuento,
-          Producto_FechaIngreso = @Fecha,
-      UnidadMedida_Id = @Unidad,
- Proveedor_Id = @Proveedor,
-    ServicioBien_Id = @Servicio,
-    Categoria_Id = @Categoria,
-     Producto_Imagen = @Imagen
-          WHERE Producto_Id = @Id";
+          if (productoIdActual == -1)
+      {
+    MessageBox.Show("⚠️ Primero debes buscar un producto.", "Advertencia",
+              MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+     }
 
-           using (SqlCommand commandProducto = new SqlCommand(queryProducto, connection, transaction))
-           {
+// ✅ Validar campos vacíos
+ var cajasVacias = new[] {
+     txtBoxCodigoProducto, txtBoxNombreProducto, textBoxDescripcion,
+     textBoxCostoUnitario, textBoxDescuento, textBoxStock,
+     textBoxUnidadMedida, textBoxAbrevLongitud, textBoxPeso, textBoxAbrevPeso,
+  textBoxProveedorNombre, textBoxTipoServicioTipo, textBoxCategoria
+  }.Where(tb => string.IsNullOrWhiteSpace(tb.Text)).ToList();
+
+    if (cajasVacias.Any())
+            {
+                MessageBox.Show("⚠️ Todos los campos son obligatorios.", "Advertencia",
+     MessageBoxButtons.OK, MessageBoxIcon.Warning);
+     return;
+            }
+
+  try
+        {
+            // 🔹 Capturar datos
+       string codigoProducto = txtBoxCodigoProducto.Text.Trim();
+                string nombreProducto = txtBoxNombreProducto.Text.Trim();
+        string descripcion = textBoxDescripcion.Text.Trim();
+      decimal costoUnitario = Convert.ToDecimal(textBoxCostoUnitario.Text);
+    decimal descuento = Convert.ToDecimal(textBoxDescuento.Text);
+       int stockDisponible = Convert.ToInt32(textBoxStock.Text);
+       DateTime fechaIngreso = dateTimePicker1.Value;
+
+     decimal longitud = Convert.ToDecimal(textBoxUnidadMedida.Text);
+        string abrevLongitud = textBoxAbrevLongitud.Text.Trim();
+       decimal peso = Convert.ToDecimal(textBoxPeso.Text);
+             string abrevPeso = textBoxAbrevPeso.Text.Trim();
+
+            string proveedorNombre = textBoxProveedorNombre.Text.Trim();
+       string servicioTipo = textBoxTipoServicioTipo.Text.Trim();
+     string categoriaNombre = textBoxCategoria.Text.Trim();
+
+     // ✅ Validar tipo
+            if (servicioTipo != "Servicio" && servicioTipo != "Bien")
+     {
+                    MessageBox.Show("⚠️ El Tipo debe ser 'Servicio' o 'Bien'", "Validación",
+           MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return;
+        }
+
+    // ✅ Manejar actualización de imagen
+  string rutaImagenFinal = rutaImagenAnterior;
+   if (pictureBoxImagen.Image != null && string.IsNullOrEmpty(rutaImagenAnterior))
+       {
+          rutaImagenFinal = ImageHelper.SaveProductImage(pictureBoxImagen.Image, codigoProducto);
+    }
+        else if (pictureBoxImagen.Image != null && !string.IsNullOrEmpty(rutaImagenAnterior))
+       {
+          Image imagenAnterior = ImageHelper.LoadProductImage(rutaImagenAnterior);
+       if (imagenAnterior == null || !ImagenesIguales(pictureBoxImagen.Image, imagenAnterior))
+  {
+rutaImagenFinal = ImageHelper.UpdateProductImage(pictureBoxImagen.Image, codigoProducto, rutaImagenAnterior);
+        }
+    }
+
+       using (var connection = DatabaseConnection.CreateConnection())
+ {
+           connection.Open();
+         using (var transaction = connection.BeginTransaction())
+       {
+           try
+      {
+       // ✅ 1. ACTUALIZAR O OBTENER UNIDAD DE MEDIDA
+     int unidadMedidaId = ObtenerOCrearUnidadMedida(connection, transaction, longitud, abrevLongitud, peso, abrevPeso);
+
+       // ✅ 2. ACTUALIZAR O OBTENER PROVEEDOR
+                int proveedorId = ObtenerOCrearProveedor(connection, transaction, proveedorNombre);
+
+          // ✅ 3. ACTUALIZAR O OBTENER SERVICIO/BIEN
+       int servicioBienId = ObtenerOCrearServicioBien(connection, transaction, servicioTipo, codigoProducto);
+
+       // ✅ 4. ACTUALIZAR O OBTENER CATEGORÍA
+         int categoriaId = ObtenerOCrearCategoria(connection, transaction, categoriaNombre);
+
+ // ✅ 5. ACTUALIZAR PRODUCTO
+  string queryProducto = @"
+           UPDATE Invt.Tb_Productos 
+ SET Producto_Codigo = @Codigo,
+            Producto_Nombre = @Nombre,
+               Producto_Descripcion = @Descripcion,
+      Producto_CostoUnitario = @Costo,
+         Producto_Descuento = @Descuento,
+Producto_FechaIngreso = @Fecha,
+        UnidadMedida_Id = @Unidad,
+       Proveedor_Id = @Proveedor,
+             ServicioBien_Id = @Servicio,
+      Categoria_Id = @Categoria,
+        Producto_ImagenRuta = @ImagenRuta
+       WHERE Producto_Id = @Id";
+
+          using (var commandProducto = new SqlCommand(queryProducto, connection, transaction))
+         {
+commandProducto.Parameters.AddWithValue("@Codigo", codigoProducto);
       commandProducto.Parameters.AddWithValue("@Nombre", nombreProducto);
-        commandProducto.Parameters.AddWithValue("@Descripcion", descripcion);
+commandProducto.Parameters.AddWithValue("@Descripcion", descripcion);
         commandProducto.Parameters.AddWithValue("@Costo", costoUnitario);
-   commandProducto.Parameters.AddWithValue("@Descuento", descuento);
-            commandProducto.Parameters.AddWithValue("@Fecha", fechaIngreso);
-            commandProducto.Parameters.AddWithValue("@Unidad", unidadMedidaId);
-           commandProducto.Parameters.AddWithValue("@Proveedor", proveedorId);
-      commandProducto.Parameters.AddWithValue("@Servicio", servicioBienId);
-       commandProducto.Parameters.AddWithValue("@Categoria", categoriaId);
-  commandProducto.Parameters.Add("@Imagen", SqlDbType.VarBinary).Value = (object)imagenBytes ?? DBNull.Value;
-               commandProducto.Parameters.AddWithValue("@Id", productoIdActual);
+       commandProducto.Parameters.AddWithValue("@Descuento", descuento);
+       commandProducto.Parameters.AddWithValue("@Fecha", fechaIngreso);
+         commandProducto.Parameters.AddWithValue("@Unidad", unidadMedidaId);
+      commandProducto.Parameters.AddWithValue("@Proveedor", proveedorId);
+           commandProducto.Parameters.AddWithValue("@Servicio", servicioBienId);
+         commandProducto.Parameters.AddWithValue("@Categoria", categoriaId);
+       commandProducto.Parameters.AddWithValue("@ImagenRuta", (object)rutaImagenFinal ?? DBNull.Value);
+    commandProducto.Parameters.AddWithValue("@Id", productoIdActual);
 
         commandProducto.ExecuteNonQuery();
       }
 
-  // ✅ 2. Actualizar o insertar en tabla de inventario
-       string queryInventarioCheck = @"
-    SELECT COUNT(*) FROM Invt.Tb_Inventario 
-    WHERE Producto_Id = @ProductoId";
+       // ✅ 6. ACTUALIZAR INVENTARIO
+   ActualizarInventario(connection, transaction, productoIdActual, stockDisponible, costoUnitario);
 
- using (SqlCommand commandCheck = new SqlCommand(queryInventarioCheck, connection, transaction))
-{
-    commandCheck.Parameters.AddWithValue("@ProductoId", productoIdActual);
-  int existeInventario = (int)commandCheck.ExecuteScalar();
+ transaction.Commit();
 
-    if (existeInventario > 0)
-    {
-        // Actualizar registro existente
-        string queryUpdateInventario = @"
-        UPDATE Invt.Tb_Inventario 
-      SET Cantidad_Disponible = @Stock,
-     Fecha_de_Actualizacion = GETDATE()
-      WHERE Producto_Id = @ProductoId";
+    MessageBox.Show("✅ Producto actualizado exitosamente.", "Éxito",
+         MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-        using (SqlCommand commandUpdate = new SqlCommand(queryUpdateInventario, connection, transaction))
-        {
-            commandUpdate.Parameters.AddWithValue("@Stock", stockDisponible);
-     commandUpdate.Parameters.AddWithValue("@ProductoId", productoIdActual);
-            commandUpdate.ExecuteNonQuery();
+        LimpiarTodosCampos();
+   DeshabilitarCampos();
+        productoIdActual = -1;
+         rutaImagenAnterior = "";
+   codigoProductoActual = "";
+             }
+    catch (Exception ex)
+       {
+       transaction.Rollback();
+    throw new Exception("Error en la transacción: " + ex.Message);
+          }
+   }
+            }
+  }
+            catch (FormatException)
+     {
+         MessageBox.Show("⚠️ Verifica que los campos numéricos tengan valores válidos.", "Error de formato",
+      MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
-    }
-    else
-    {
-   // ✅ Insertar nuevo registro con todos los campos requeridos
-   // Primero obtenemos una estantería disponible (usaremos la primera disponible)
-        string queryEstanteria = @"
-    SELECT TOP 1 Estanteria_Id 
-   FROM Invt.Tb_Estanterias 
-            WHERE EstadoBodega_Id IN (SELECT EstadoBodega_Id FROM Invt.Tb_EstadoBodegas WHERE EstadoBodega_Estado = 'Activo')
-    ORDER BY Estanteria_Id";
-
-        int estanteriaId = 1; // Valor por defecto en caso de no encontrar estantería
-        
- using (SqlCommand commandEstanteria = new SqlCommand(queryEstanteria, connection, transaction))
-        {
-   var result = commandEstanteria.ExecuteScalar();
-   if (result != null)
-    {
-       estanteriaId = Convert.ToInt32(result);
+    catch (Exception ex)
+            {
+       MessageBox.Show("❌ Error al actualizar: " + ex.Message, "Error",
+        MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-  // Calcular precio de venta (costo + 30% de margen como ejemplo)
-      decimal precioVenta = costoUnitario * 1.30m;
-
-        string queryInsertInventario = @"
-     INSERT INTO Invt.Tb_Inventario 
-    (Estanteria_Id, Producto_Id, Cantidad_Disponible, Fecha_de_Actualizacion, Precio_Venta)
-    VALUES (@EstanteriaId, @ProductoId, @Stock, GETDATE(), @PrecioVenta)";
-
-        using (SqlCommand commandInsert = new SqlCommand(queryInsertInventario, connection, transaction))
-        {
-        commandInsert.Parameters.AddWithValue("@EstanteriaId", estanteriaId);
-            commandInsert.Parameters.AddWithValue("@ProductoId", productoIdActual);
-     commandInsert.Parameters.AddWithValue("@Stock", stockDisponible);
-            commandInsert.Parameters.AddWithValue("@PrecioVenta", precioVenta);
-       commandInsert.ExecuteNonQuery();
-        }
-    }
-}
-     // ✅ Confirmar transacción
-     transaction.Commit();
-
-     MessageBox.Show("✅ Producto y stock actualizados exitosamente.", "Éxito",
-             MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-       LimpiarTodosCampos();
-          DeshabilitarCampos();
-        productoIdActual = -1;
-    }
-             catch (Exception ex)
+   // ✅ MÉTODOS AUXILIARES PARA OBTENER/CREAR REGISTROS
+        private int ObtenerOCrearUnidadMedida(SqlConnection conn, SqlTransaction trans, decimal longitud, string abrevLong, decimal peso, string abrevPeso)
  {
-        // ❌ Revertir transacción en caso de error
-            transaction.Rollback();
-         throw new Exception("Error en la transacción: " + ex.Message);
-              }
-  }
-        }
-    }
-    catch (FormatException)
-    {
-        MessageBox.Show("⚠️ Por favor verifica que los campos numéricos tengan valores válidos.", "Error de formato",
-           MessageBoxButtons.OK, MessageBoxIcon.Warning);
-    }
-    catch (Exception ex)
-  {
-        MessageBox.Show("❌ Error al actualizar: " + ex.Message, "Error",
-      MessageBoxButtons.OK, MessageBoxIcon.Error);
-    }
-}
+       string queryCheck = @"SELECT UnidadMedida_Id FROM Invt.Tb_UnidadMedidas
+           WHERE UnidadMedida_Longitud = @Longitud AND UnidadMedida_AbrevLongitud = @AbrevLong
+           AND UnidadMedida_Peso = @Peso AND UnidadMedida_AbrevPeso = @AbrevPeso";
 
-        private void buttonImagen_Click(object sender, EventArgs e)
-      {
+            using (var cmd = new SqlCommand(queryCheck, conn, trans))
+     {
+  cmd.Parameters.AddWithValue("@Longitud", longitud);
+     cmd.Parameters.AddWithValue("@AbrevLong", abrevLong);
+                cmd.Parameters.AddWithValue("@Peso", peso);
+  cmd.Parameters.AddWithValue("@AbrevPeso", abrevPeso);
+
+  var result = cmd.ExecuteScalar();
+     if (result != null) return Convert.ToInt32(result);
+         }
+
+       string queryInsert = @"INSERT INTO Invt.Tb_UnidadMedidas 
+         (UnidadMedida_Longitud, UnidadMedida_AbrevLongitud, UnidadMedida_AbrevPeso, UnidadMedida_Peso)
+       OUTPUT INSERTED.UnidadMedida_Id
+  VALUES (@Longitud, @AbrevLong, @AbrevPeso, @Peso)";
+
+      using (var cmd = new SqlCommand(queryInsert, conn, trans))
+            {
+ cmd.Parameters.AddWithValue("@Longitud", longitud);
+                cmd.Parameters.AddWithValue("@AbrevLong", abrevLong);
+       cmd.Parameters.AddWithValue("@Peso", peso);
+     cmd.Parameters.AddWithValue("@AbrevPeso", abrevPeso);
+      return (int)cmd.ExecuteScalar();
+}
+        }
+
+        private int ObtenerOCrearProveedor(SqlConnection conn, SqlTransaction trans, string nombre)
+ {
+     string queryCheck = "SELECT Proveedor_Id FROM Invt.Tb_Proveedores WHERE Proveedor_Nombre = @Nombre";
+
+      using (var cmd = new SqlCommand(queryCheck, conn, trans))
+         {
+      cmd.Parameters.AddWithValue("@Nombre", nombre);
+  var result = cmd.ExecuteScalar();
+ if (result != null) return Convert.ToInt32(result);
+       }
+
+       // ✅ Generar NIT automático de MÁXIMO 9 caracteres
+    string nitAutomatico = DateTime.Now.ToString("yyMMddHHmmss").Substring(0, 9); // ✅ CORREGIDO
+    string queryInsert = @"INSERT INTO Invt.Tb_Proveedores (Proveedor_NIT, Proveedor_Nombre, Municipio_Id)
+        OUTPUT INSERTED.Proveedor_Id VALUES (@NIT, @Nombre, 1)";
+
+       using (var cmd = new SqlCommand(queryInsert, conn, trans))
+   {
+      cmd.Parameters.AddWithValue("@NIT", nitAutomatico);
+   cmd.Parameters.AddWithValue("@Nombre", nombre);
+    return (int)cmd.ExecuteScalar();
+}
+        }
+
+    private int ObtenerOCrearServicioBien(SqlConnection conn, SqlTransaction trans, string tipo, string codigo)
+        {
+       string nombre = $"{tipo} - {codigo}";
+   string queryCheck = "SELECT ServicioBien_Id FROM Invt.Tb_ServiciosBienes WHERE ServicioBien_Tipo = @Tipo AND ServicioBien_Nombre = @Nombre";
+
+ using (var cmd = new SqlCommand(queryCheck, conn, trans))
+   {
+  cmd.Parameters.AddWithValue("@Tipo", tipo);
+        cmd.Parameters.AddWithValue("@Nombre", nombre);
+      var result = cmd.ExecuteScalar();
+     if (result != null) return Convert.ToInt32(result);
+  }
+
+  string queryInsert = @"INSERT INTO Invt.Tb_ServiciosBienes (ServicioBien_Nombre, ServicioBien_Tipo)
+            OUTPUT INSERTED.ServicioBien_Id VALUES (@Nombre, @Tipo)";
+
+            using (var cmd = new SqlCommand(queryInsert, conn, trans))
+        {
+            cmd.Parameters.AddWithValue("@Nombre", nombre);
+cmd.Parameters.AddWithValue("@Tipo", tipo);
+   return (int)cmd.ExecuteScalar();
+          }
+ }
+
+        private int ObtenerOCrearCategoria(SqlConnection conn, SqlTransaction trans, string nombre)
+        {
+            string queryCheck = "SELECT Categoria_Id FROM Invt.Tb_Categorias WHERE Categoria_Nombre = @Nombre";
+
+            using (var cmd = new SqlCommand(queryCheck, conn, trans))
+         {
+     cmd.Parameters.AddWithValue("@Nombre", nombre);
+       var result = cmd.ExecuteScalar();
+      if (result != null) return Convert.ToInt32(result);
+    }
+
+          string queryInsert = @"INSERT INTO Invt.Tb_Categorias (Categoria_Nombre)
+         OUTPUT INSERTED.Categoria_Id VALUES (@Nombre)";
+
+  using (var cmd = new SqlCommand(queryInsert, conn, trans))
+ {
+   cmd.Parameters.AddWithValue("@Nombre", nombre);
+  return (int)cmd.ExecuteScalar();
+            }
+        }
+
+  private void ActualizarInventario(SqlConnection conn, SqlTransaction trans, int productoId, int stock, decimal costo)
+        {
+       string queryCheck = "SELECT COUNT(*) FROM Invt.Tb_Inventario WHERE Producto_Id = @ProductoId";
+
+      using (var cmd = new SqlCommand(queryCheck, conn, trans))
+  {
+     cmd.Parameters.AddWithValue("@ProductoId", productoId);
+        int existe = (int)cmd.ExecuteScalar();
+
+            if (existe > 0)
+    {
+    string queryUpdate = @"UPDATE Invt.Tb_Inventario SET Cantidad_Disponible = @Stock,
+            Fecha_de_Actualizacion = GETDATE() WHERE Producto_Id = @ProductoId";
+
+      using (var cmdUpdate = new SqlCommand(queryUpdate, conn, trans))
+          {
+            cmdUpdate.Parameters.AddWithValue("@Stock", stock);
+       cmdUpdate.Parameters.AddWithValue("@ProductoId", productoId);
+  cmdUpdate.ExecuteNonQuery();
+            }
+                }
+       else
+{
+           int estanteriaId = 1;
+               decimal precioVenta = costo * 1.30m;
+
+ string queryInsert = @"INSERT INTO Invt.Tb_Inventario 
+ (Estanteria_Id, Producto_Id, Cantidad_Disponible, Fecha_de_Actualizacion, Precio_Venta)
+        VALUES (@EstanteriaId, @ProductoId, @Stock, GETDATE(), @PrecioVenta)";
+
+  using (var cmdInsert = new SqlCommand(queryInsert, conn, trans))
+   {
+  cmdInsert.Parameters.AddWithValue("@EstanteriaId", estanteriaId);
+ cmdInsert.Parameters.AddWithValue("@ProductoId", productoId);
+  cmdInsert.Parameters.AddWithValue("@Stock", stock);
+     cmdInsert.Parameters.AddWithValue("@PrecioVenta", precioVenta);
+   cmdInsert.ExecuteNonQuery();
+        }
+      }
+    }
+ }
+
+   private void buttonImagen_Click(object sender, EventArgs e)
+        {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-     openFileDialog.Filter = "Archivos de Imagen|*.jpg;*.png;*.jpeg;*.bmp";
+          openFileDialog.Filter = "Archivos de Imagen|*.jpg;*.png;*.jpeg;*.bmp";
 
         if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-           pictureBoxImagen.Image = Image.FromFile(openFileDialog.FileName);
-      pictureBoxImagen.SizeMode = PictureBoxSizeMode.StretchImage;
-    }
+{
+   pictureBoxImagen.Image = Image.FromFile(openFileDialog.FileName);
+   pictureBoxImagen.SizeMode = PictureBoxSizeMode.Zoom;
+            }
         }
 
-      private void LimpiarCamposResultados()
+   private bool ImagenesIguales(Image img1, Image img2)
         {
-            txtBoxNombreProducto.Clear();
-    textBoxDescripcion.Clear();
- textBoxCostoUnitario.Clear();
-            textBoxDescuento.Clear();
-       textBoxStock.Clear();
-      comboBoxUnidadMedida.SelectedIndex = -1;
-     comboBoxProveedor.SelectedIndex = -1;
-            comboBoxTipoServicioProducto.SelectedIndex = -1;
-            comboBoxCategoria.SelectedIndex = -1;
-            pictureBoxImagen.Image = null;
-        productoIdActual = -1;
+          if (img1 == null || img2 == null) return false;
+   if (img1.Width != img2.Width || img1.Height != img2.Height) return false;
+
+  using (var ms1 = new MemoryStream())
+            using (var ms2 = new MemoryStream())
+          {
+                img1.Save(ms1, System.Drawing.Imaging.ImageFormat.Png);
+      img2.Save(ms2, System.Drawing.Imaging.ImageFormat.Png);
+ return ms1.ToArray().SequenceEqual(ms2.ToArray());
      }
+        }
+
+ private void LimpiarCamposResultados()
+        {
+txtBoxCodigoProducto.Clear();
+   txtBoxNombreProducto.Clear();
+       textBoxDescripcion.Clear();
+            textBoxCostoUnitario.Clear();
+     textBoxDescuento.Clear();
+     textBoxStock.Clear();
+       textBoxUnidadMedida.Clear();
+            textBoxAbrevLongitud.Clear();
+     textBoxPeso.Clear();
+     textBoxAbrevPeso.Clear();
+ textBoxProveedorNombre.Clear();
+      textBoxTipoServicioTipo.Clear();
+textBoxCategoria.Clear();
+          pictureBoxImagen.Image = null;
+     productoIdActual = -1;
+      rutaImagenAnterior = "";
+    codigoProductoActual = "";
+        }
 
         private void LimpiarTodosCampos()
-      {
-     txtBoxCodigoProductoB.Clear();
-   textBoxNombreProductoBU.Clear(); // ✅ Limpiar campo de búsqueda por nombre
-            textBoxCategoriaProductoBU.Clear();
-        LimpiarCamposResultados();
+  {
+ txtBoxCodigoProductoB.Clear();
+            textBoxNombreProductoBU.Clear();
+  LimpiarCamposResultados();
         }
 
- private void buttonAtras_Click(object sender, EventArgs e)
-     {
-     OpcionesForm opcionesForm = new OpcionesForm();
-    opcionesForm.Show();
-      this.Hide();
+    private void buttonAtras_Click(object sender, EventArgs e)
+        {
+         OpcionesForm opcionesForm = new OpcionesForm();
+            opcionesForm.Show();
+            this.Hide();
         }
 
         private void lblTitulo_Click(object sender, EventArgs e) { }
-        private void label1_Click(object sender, EventArgs e) { }
-    private void lblNombreProducto_Click(object sender, EventArgs e) { }
-     private void label1_Click_1(object sender, EventArgs e) { }
-        private void txtBoxCodigoProductoB_TextChanged(object sender, EventArgs e) { }
-        private void comboBoxCategoria_SelectedIndexChanged(object sender, EventArgs e) { }
+    private void txtBoxCodigoProductoB_TextChanged(object sender, EventArgs e) { }
     }
 }
