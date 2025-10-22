@@ -63,9 +63,9 @@ namespace Proyecto_Base_de_Datos.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Imagen1 {
+        internal static System.Drawing.Bitmap icono_del_gestor {
             get {
-                object obj = ResourceManager.GetObject("Imagen1", resourceCulture);
+                object obj = ResourceManager.GetObject("icono del gestor", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace Proyecto_Base_de_Datos.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap WhatsApp_Image_2025_09_30_at_4_32_24_PM {
+        internal static System.Drawing.Bitmap Imagen1 {
             get {
-                object obj = ResourceManager.GetObject("WhatsApp Image 2025-09-30 at 4.32.24 PM", resourceCulture);
+                object obj = ResourceManager.GetObject("Imagen1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

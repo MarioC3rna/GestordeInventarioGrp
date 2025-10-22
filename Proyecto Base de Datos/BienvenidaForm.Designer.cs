@@ -23,7 +23,7 @@
             lblWelcome.Anchor = AnchorStyles.Top;
             lblWelcome.Font = new Font("Segoe UI", 22F, FontStyle.Bold);
             lblWelcome.ForeColor = Color.MediumSlateBlue;
-            lblWelcome.Location = new Point(88, 202);
+            lblWelcome.Location = new Point(98, 62);
             lblWelcome.Name = "lblWelcome";
             lblWelcome.Size = new Size(525, 38);
             lblWelcome.TabIndex = 2;
@@ -70,12 +70,14 @@
             // 
             // logo
             // 
+            logo.ErrorImage = Properties.Resources.icono_del_gestor;
             logo.Image = Properties.Resources.Imagen1;
             logo.ImageLocation = "";
-            logo.Location = new Point(284, 75);
+            logo.InitialImage = Properties.Resources.icono_del_gestor;
+            logo.Location = new Point(290, 117);
             logo.Margin = new Padding(3, 2, 3, 2);
             logo.Name = "logo";
-            logo.Size = new Size(149, 125);
+            logo.Size = new Size(147, 112);
             logo.SizeMode = PictureBoxSizeMode.Zoom;
             logo.TabIndex = 1;
             logo.TabStop = false;
