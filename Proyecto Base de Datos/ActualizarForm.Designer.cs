@@ -204,7 +204,7 @@
             // labelDescripcion
             // 
             labelDescripcion.AutoSize = true;
-            labelDescripcion.Location = new Point(188, 234);
+            labelDescripcion.Location = new Point(188, 259);
             labelDescripcion.Name = "labelDescripcion";
             labelDescripcion.Size = new Size(69, 15);
             labelDescripcion.TabIndex = 15;
@@ -238,7 +238,7 @@
             // labelDescuento
             // 
             labelDescuento.AutoSize = true;
-            labelDescuento.Location = new Point(188, 259);
+            labelDescuento.Location = new Point(188, 234);
             labelDescuento.Name = "labelDescuento";
             labelDescuento.Size = new Size(63, 15);
             labelDescuento.TabIndex = 19;
