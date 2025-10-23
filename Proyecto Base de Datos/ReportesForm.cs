@@ -376,58 +376,199 @@ ExportarAExcel(saveDialog.FileName);
         // Crear hoja de trabajo
     ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("Reporte");
 
-      // Agregar título
-        string tipoReporte = ObtenerNombreTipoReporte();
-           worksheet.Cells[1, 1].Value = $"REPORTE: {tipoReporte}";
-       worksheet.Cells[1, 1].Style.Font.Bold = true;
-            worksheet.Cells[1, 1].Style.Font.Size = 16;
-                
-// Agregar fecha de generación
-              worksheet.Cells[2, 1].Value = $"Generado el: {DateTime.Now:dd/MM/yyyy HH:mm}";
-    worksheet.Cells[2, 1].Style.Font.Italic = true;
+      // ???????????????????????????????????????????????????????????
+    // ENCABEZADO DE LA EMPRESA
+      // ???????????????????????????????????????????????????????????
+    
+      // Combinar celdas para el logo/nombre de empresa
+    worksheet.Cells["A1:H1"].Merge = true;
+     worksheet.Cells["A1"].Value = "SISTEMA DE GESTIÓN DE INVENTARIO";
+     worksheet.Cells["A1"].Style.Font.Bold = true;
+      worksheet.Cells["A1"].Style.Font.Size = 18;
+                worksheet.Cells["A1"].Style.Font.Color.SetColor(Color.White);
+              worksheet.Cells["A1"].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+     worksheet.Cells["A1"].Style.Fill.BackgroundColor.SetColor(Color.FromArgb(68, 114, 196)); // Azul corporativo
+    worksheet.Cells["A1"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
+         worksheet.Cells["A1"].Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Center;
+        worksheet.Row(1).Height = 30;
 
-     // Agregar filtros aplicados
-         string filtros = ObtenerDescripcionFiltros();
-      if (!string.IsNullOrEmpty(filtros))
-  {
-     worksheet.Cells[3, 1].Value = filtros;
-    worksheet.Cells[3, 1].Style.Font.Italic = true;
+    // Información de la empresa
+              worksheet.Cells["A2:H2"].Merge = true;
+        worksheet.Cells["A2"].Value = "Empresa de Desarrollo | Tel: (502) 1234-5678 | Email: inventario@empresa.com";
+     worksheet.Cells["A2"].Style.Font.Size = 10;
+    worksheet.Cells["A2"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
+   worksheet.Cells["A2"].Style.Font.Italic = true;
+              worksheet.Row(2).Height = 18;
+
+  // Línea separadora
+        worksheet.Cells["A3:H3"].Style.Border.Bottom.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thick;
+     worksheet.Cells["A3:H3"].Style.Border.Bottom.Color.SetColor(Color.FromArgb(68, 114, 196));
+
+   // ???????????????????????????????????????????????????????????
+         // INFORMACIÓN DEL REPORTE
+    // ???????????????????????????????????????????????????????????
+
+            string tipoReporte = ObtenerNombreTipoReporte();
+      worksheet.Cells["A4:H4"].Merge = true;
+        worksheet.Cells["A4"].Value = $"REPORTE: {tipoReporte}";
+worksheet.Cells["A4"].Style.Font.Bold = true;
+        worksheet.Cells["A4"].Style.Font.Size = 14;
+   worksheet.Cells["A4"].Style.Font.Color.SetColor(Color.FromArgb(68, 114, 196));
+     worksheet.Row(4).Height = 25;
+             
+      // Fecha de generación
+                worksheet.Cells["A5"].Value = "Fecha de Generación:";
+                worksheet.Cells["A5"].Style.Font.Bold = true;
+  worksheet.Cells["B5:D5"].Merge = true;
+    worksheet.Cells["B5"].Value = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
+
+      // Usuario que generó el reporte
+      worksheet.Cells["E5"].Value = "Usuario:";
+         worksheet.Cells["E5"].Style.Font.Bold = true;
+      worksheet.Cells["F5:H5"].Merge = true;
+    worksheet.Cells["F5"].Value = "ADMIN_INVENTARIO";
+
+     // Filtros aplicados
+  string filtros = ObtenerDescripcionFiltros();
+ if (!string.IsNullOrEmpty(filtros))
+          {
+     worksheet.Cells["A6"].Value = "Filtros:";
+         worksheet.Cells["A6"].Style.Font.Bold = true;
+                    worksheet.Cells["B6:H6"].Merge = true;
+        worksheet.Cells["B6"].Value = filtros;
+      worksheet.Cells["B6"].Style.Font.Italic = true;
+                }
+
+      // Línea en blanco
+              int filaInicio = string.IsNullOrEmpty(filtros) ? 7 : 8;
+
+        // ???????????????????????????????????????????????????????????
+    // ENCABEZADOS DE COLUMNAS
+   // ???????????????????????????????????????????????????????????
+             
+           for (int col = 0; col < datosReporte.Columns.Count; col++)
+                {
+        var celda = worksheet.Cells[filaInicio, col + 1];
+     celda.Value = datosReporte.Columns[col].ColumnName;
+     celda.Style.Font.Bold = true;
+  celda.Style.Font.Size = 11;
+          celda.Style.Font.Color.SetColor(Color.White);
+       celda.Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+       celda.Style.Fill.BackgroundColor.SetColor(Color.FromArgb(68, 114, 196));
+        celda.Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
+        celda.Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Center;
+  celda.Style.Border.BorderAround(OfficeOpenXml.Style.ExcelBorderStyle.Thin, Color.White);
+            }
+                worksheet.Row(filaInicio).Height = 25;
+
+        // ???????????????????????????????????????????????????????????
+      // DATOS DEL REPORTE
+ // ???????????????????????????????????????????????????????????
+    
+      for (int fila = 0; fila < datosReporte.Rows.Count; fila++)
+            {
+        for (int col = 0; col < datosReporte.Columns.Count; col++)
+{
+           var celda = worksheet.Cells[fila + filaInicio + 1, col + 1];
+      var valor = datosReporte.Rows[fila][col];
+      celda.Value = valor;
+
+                // Alternar colores de filas
+ if (fila % 2 == 0)
+          {
+     celda.Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+       celda.Style.Fill.BackgroundColor.SetColor(Color.FromArgb(217, 226, 243));
+   }
+
+    // Formatear números
+            if (valor != DBNull.Value)
+      {
+      string columnName = datosReporte.Columns[col].ColumnName.ToLower();
+      
+     // Formatear precios y costos
+       if (columnName.Contains("precio") || columnName.Contains("costo"))
+                   {
+              celda.Style.Numberformat.Format = "Q #,##0.00";
+   celda.Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Right;
+           }
+         // Formatear cantidades
+   else if (columnName.Contains("stock") || columnName.Contains("cantidad"))
+       {
+          celda.Style.Numberformat.Format = "#,##0";
+celda.Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
+     }
+    }
+
+       // Bordes
+          celda.Style.Border.BorderAround(OfficeOpenXml.Style.ExcelBorderStyle.Thin, Color.Gray);
+           }
        }
 
-      // Agregar encabezados
-     int filaInicio = 5;
-    for (int col = 0; col < datosReporte.Columns.Count; col++)
-     {
-   worksheet.Cells[filaInicio, col + 1].Value = datosReporte.Columns[col].ColumnName;
-         worksheet.Cells[filaInicio, col + 1].Style.Font.Bold = true;
-         worksheet.Cells[filaInicio, col + 1].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
-    worksheet.Cells[filaInicio, col + 1].Style.Fill.BackgroundColor.SetColor(Color.LightBlue);
-          }
+      // ???????????????????????????????????????????????????????????
+  // PIE DEL REPORTE
+     // ???????????????????????????????????????????????????????????
+   
+   int filaPie = filaInicio + datosReporte.Rows.Count + 2;
+             
+   // Total de registros
+   worksheet.Cells[filaPie, 1].Value = "Total de Registros:";
+    worksheet.Cells[filaPie, 1].Style.Font.Bold = true;
+     worksheet.Cells[filaPie, 2].Value = datosReporte.Rows.Count;
+     worksheet.Cells[filaPie, 2].Style.Font.Bold = true;
 
-            // Agregar datos
-           for (int fila = 0; fila < datosReporte.Rows.Count; fila++)
-                {
-         for (int col = 0; col < datosReporte.Columns.Count; col++)
+            // Calcular totales si hay columnas de stock o cantidad
+              var columnasStock = datosReporte.Columns.Cast<DataColumn>()
+   .Where(c => c.ColumnName.ToLower().Contains("stock") || 
+        c.ColumnName.ToLower().Contains("cantidad"))
+     .ToList();
+
+          if (columnasStock.Any())
+ {
+    foreach (var col in columnasStock)
         {
-     var valor = datosReporte.Rows[fila][col];
-               worksheet.Cells[fila + filaInicio + 1, col + 1].Value = valor;
-   }
+     int colIndex = datosReporte.Columns.IndexOf(col);
+    decimal total = 0;
+               
+           foreach (DataRow row in datosReporte.Rows)
+       {
+    if (row[col] != DBNull.Value && decimal.TryParse(row[col].ToString(), out decimal val))
+              {
+           total += val;
+          }
+      }
+
+        worksheet.Cells[filaPie + 1, 1].Value = $"Total {col.ColumnName}:";
+   worksheet.Cells[filaPie + 1, 1].Style.Font.Bold = true;
+  worksheet.Cells[filaPie + 1, 2].Value = total;
+            worksheet.Cells[filaPie + 1, 2].Style.Font.Bold = true;
+  worksheet.Cells[filaPie + 1, 2].Style.Numberformat.Format = "#,##0";
+     filaPie++;
+     }
            }
 
-       // Ajustar ancho de columnas
-      worksheet.Cells.AutoFitColumns();
+    // ???????????????????????????????????????????????????????????
+ // AJUSTES FINALES
+ // ???????????????????????????????????????????????????????????
+   
+             // Ajustar ancho de columnas
+     worksheet.Cells.AutoFitColumns();
+                
+   // Ajustar ancho mínimo y máximo
+     for (int col = 1; col <= datosReporte.Columns.Count; col++)
+    {
+            if (worksheet.Column(col).Width < 15)
+          worksheet.Column(col).Width = 15;
+         if (worksheet.Column(col).Width > 50)
+     worksheet.Column(col).Width = 50;
+       }
 
-     // Agregar bordes
-       var rango = worksheet.Cells[filaInicio, 1, filaInicio + datosReporte.Rows.Count, datosReporte.Columns.Count];
-        rango.Style.Border.Top.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
-            rango.Style.Border.Left.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
-        rango.Style.Border.Right.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
-          rango.Style.Border.Bottom.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+    // Congelar paneles (encabezado fijo)
+          worksheet.View.FreezePanes(filaInicio + 1, 1);
 
-    // Guardar archivo
-   FileInfo file = new FileInfo(rutaArchivo);
+       // Guardar archivo
+       FileInfo file = new FileInfo(rutaArchivo);
        package.SaveAs(file);
-         }
+        }
         }
 
         private string ObtenerNombreTipoReporte()
