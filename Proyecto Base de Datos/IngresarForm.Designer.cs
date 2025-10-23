@@ -4,13 +4,13 @@
     {
         private System.ComponentModel.IContainer components = null;
 
-    protected override void Dispose(bool disposing)
+        protected override void Dispose(bool disposing)
         {
-    if (disposing && (components != null))
-     {
-            components.Dispose();
+            if (disposing && (components != null))
+            {
+                components.Dispose();
             }
-        base.Dispose(disposing);
+            base.Dispose(disposing);
         }
 
         #region Windows Form Designer generated code
@@ -48,6 +48,8 @@
             textBoxCategoria = new TextBox();
             labelStock = new Label();
             textBoxStock = new TextBox();
+            labelBodega = new Label();
+            comboBoxBodega = new ComboBox();
             buttonIngresarBD = new Button();
             labelImagen = new Label();
             pictureBoxImagen = new PictureBox();
@@ -324,11 +326,29 @@
             textBoxStock.Size = new Size(80, 23);
             textBoxStock.TabIndex = 29;
             // 
+            // labelBodega
+            // 
+            labelBodega.AutoSize = true;
+            labelBodega.Location = new Point(190, 440);
+            labelBodega.Name = "labelBodega";
+            labelBodega.Size = new Size(50, 15);
+            labelBodega.TabIndex = 34;
+            labelBodega.Text = "Bodega:";
+            // 
+            // comboBoxBodega
+            // 
+            comboBoxBodega.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxBodega.FormattingEnabled = true;
+            comboBoxBodega.Location = new Point(340, 437);
+            comboBoxBodega.Name = "comboBoxBodega";
+            comboBoxBodega.Size = new Size(200, 23);
+            comboBoxBodega.TabIndex = 35;
+            // 
             // buttonIngresarBD
             // 
             buttonIngresarBD.BackColor = Color.MediumSlateBlue;
             buttonIngresarBD.ForeColor = Color.White;
-            buttonIngresarBD.Location = new Point(340, 450);
+            buttonIngresarBD.Location = new Point(340, 480);
             buttonIngresarBD.Name = "buttonIngresarBD";
             buttonIngresarBD.Size = new Size(150, 40);
             buttonIngresarBD.TabIndex = 33;
@@ -369,7 +389,9 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 550);
+            ClientSize = new Size(800, 580);
+            Controls.Add(comboBoxBodega);
+            Controls.Add(labelBodega);
             Controls.Add(buttonIngresarBD);
             Controls.Add(buttonImagen);
             Controls.Add(pictureBoxImagen);
@@ -422,32 +444,34 @@
         private TextBox txtBoxCodigoProducto;
         private Label lblNombreProducto;
         private TextBox txtBoxNombreProducto;
-     private Label labelDescripcion;
+        private Label labelDescripcion;
         private TextBox textBoxDescripcion;
         private Label labelCostoUnitario;
         private TextBox textBoxCostoUnitario;
-     private Label labelDescuento;
+        private Label labelDescuento;
         private TextBox textBoxDescuento;
-     private Label labelFecha;
+        private Label labelFecha;
         private DateTimePicker dateTimePicker1;
-     private Label lblUnidadMedida;
+        private Label lblUnidadMedida;
         private TextBox textBoxUnidadMedida;
-     private Label lblAbrevLongitud;
+        private Label lblAbrevLongitud;
         private TextBox textBoxAbrevLongitud;
-      private Label lblAbrevPeso;
+        private Label lblAbrevPeso;
         private TextBox textBoxAbrevPeso;
-private Label lblPeso;
+        private Label lblPeso;
         private TextBox textBoxPeso;
         private Label lblProveedor;
-  private TextBox textBoxProveedorNombre;
+        private TextBox textBoxProveedorNombre;
         private Label lblTipoServicioProducto;
         private TextBox textBoxTipoServicioTipo;
         private Label labelCategoria;
-      private TextBox textBoxCategoria;
+        private TextBox textBoxCategoria;
         private Label labelStock;
         private TextBox textBoxStock;
-     private Label labelImagen;
-    private PictureBox pictureBoxImagen;
+        private Label labelBodega;
+        private ComboBox comboBoxBodega;
+        private Label labelImagen;
+        private PictureBox pictureBoxImagen;
         private Button buttonImagen;
         private Button buttonIngresarBD;
     }

@@ -51,6 +51,16 @@
             pictureBoxBuscarForm = new PictureBox();
             lblImagenBU = new Label();
             buttonCargarImagenBU = new Button();
+            lblCategoriaBU = new Label();
+            textBoxCategoriaBU = new TextBox();
+            lblUnidadMedidaBU = new Label();
+            textBoxUnidadMedidaBU = new TextBox();
+            lblPesoBU = new Label();
+            textBoxPesoBU = new TextBox();
+            lblFechaIngresoBU = new Label();
+            textBoxFechaIngresoBU = new TextBox();
+            lblBodegaBU = new Label();
+            textBoxBodegaBU = new TextBox();
             panelLeft.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxBuscarForm).BeginInit();
             SuspendLayout();
@@ -63,13 +73,13 @@
             panelLeft.Location = new Point(0, 0);
             panelLeft.Margin = new Padding(3, 2, 3, 2);
             panelLeft.Name = "panelLeft";
-            panelLeft.Size = new Size(175, 338);
+            panelLeft.Size = new Size(175, 500);
             panelLeft.TabIndex = 2;
             // 
             // buttonAtrasBUS
             // 
             buttonAtrasBUS.ImeMode = ImeMode.NoControl;
-            buttonAtrasBUS.Location = new Point(37, 298);
+            buttonAtrasBUS.Location = new Point(37, 460);
             buttonAtrasBUS.Margin = new Padding(3, 2, 3, 2);
             buttonAtrasBUS.Name = "buttonAtrasBUS";
             buttonAtrasBUS.Size = new Size(82, 22);
@@ -149,18 +159,18 @@
             lblCostoBU.AutoSize = true;
             lblCostoBU.Location = new Point(188, 175);
             lblCostoBU.Name = "lblCostoBU";
-            lblCostoBU.Size = new Size(38, 15);
+            lblCostoBU.Size = new Size(86, 15);
             lblCostoBU.TabIndex = 15;
-            lblCostoBU.Text = "Costo";
+            lblCostoBU.Text = "Costo Unitario";
             // 
             // lblTipoServicioBU
             // 
             lblTipoServicioBU.AutoSize = true;
             lblTipoServicioBU.Location = new Point(188, 201);
             lblTipoServicioBU.Name = "lblTipoServicioBU";
-            lblTipoServicioBU.Size = new Size(162, 15);
+            lblTipoServicioBU.Size = new Size(102, 15);
             lblTipoServicioBU.TabIndex = 16;
-            lblTipoServicioBU.Text = "Tipo de Servicio del Producto";
+            lblTipoServicioBU.Text = "Tipo Servicio/Bien";
             // 
             // lblProveedorBU
             // 
@@ -193,7 +203,7 @@
             // 
             textBoxStockBU.BackColor = Color.LightGray;
             textBoxStockBU.Enabled = false;
-            textBoxStockBU.Location = new Point(394, 150);
+            textBoxStockBU.Location = new Point(300, 150);
             textBoxStockBU.Margin = new Padding(3, 2, 3, 2);
             textBoxStockBU.Name = "textBoxStockBU";
             textBoxStockBU.ReadOnly = true;
@@ -202,50 +212,68 @@
             // 
             // textBoxCostoBU
             // 
-            textBoxCostoBU.Location = new Point(394, 175);
+            textBoxCostoBU.BackColor = Color.LightGray;
+            textBoxCostoBU.Enabled = false;
+            textBoxCostoBU.Location = new Point(300, 175);
             textBoxCostoBU.Margin = new Padding(3, 2, 3, 2);
             textBoxCostoBU.Name = "textBoxCostoBU";
+            textBoxCostoBU.ReadOnly = true;
             textBoxCostoBU.Size = new Size(110, 23);
             textBoxCostoBU.TabIndex = 21;
             // 
             // textBoxTipoServicioBU
             // 
-            textBoxTipoServicioBU.Location = new Point(394, 201);
+            textBoxTipoServicioBU.BackColor = Color.LightGray;
+            textBoxTipoServicioBU.Enabled = false;
+            textBoxTipoServicioBU.Location = new Point(300, 201);
             textBoxTipoServicioBU.Margin = new Padding(3, 2, 3, 2);
             textBoxTipoServicioBU.Name = "textBoxTipoServicioBU";
+            textBoxTipoServicioBU.ReadOnly = true;
             textBoxTipoServicioBU.Size = new Size(110, 23);
             textBoxTipoServicioBU.TabIndex = 22;
             // 
             // textBoxProveedorBU
             // 
-            textBoxProveedorBU.Location = new Point(394, 225);
+            textBoxProveedorBU.BackColor = Color.LightGray;
+            textBoxProveedorBU.Enabled = false;
+            textBoxProveedorBU.Location = new Point(300, 225);
             textBoxProveedorBU.Margin = new Padding(3, 2, 3, 2);
             textBoxProveedorBU.Name = "textBoxProveedorBU";
+            textBoxProveedorBU.ReadOnly = true;
             textBoxProveedorBU.Size = new Size(110, 23);
             textBoxProveedorBU.TabIndex = 23;
             // 
             // textBoxDescuentoBU
             // 
-            textBoxDescuentoBU.Location = new Point(394, 249);
+            textBoxDescuentoBU.BackColor = Color.LightGray;
+            textBoxDescuentoBU.Enabled = false;
+            textBoxDescuentoBU.Location = new Point(300, 249);
             textBoxDescuentoBU.Margin = new Padding(3, 2, 3, 2);
             textBoxDescuentoBU.Name = "textBoxDescuentoBU";
+            textBoxDescuentoBU.ReadOnly = true;
             textBoxDescuentoBU.Size = new Size(110, 23);
             textBoxDescuentoBU.TabIndex = 24;
             // 
             // textBoxDescripcionBU
             // 
-            textBoxDescripcionBU.Location = new Point(341, 273);
+            textBoxDescripcionBU.BackColor = Color.LightGray;
+            textBoxDescripcionBU.Enabled = false;
+            textBoxDescripcionBU.Location = new Point(300, 273);
             textBoxDescripcionBU.Margin = new Padding(3, 2, 3, 2);
+            textBoxDescripcionBU.Multiline = true;
             textBoxDescripcionBU.Name = "textBoxDescripcionBU";
-            textBoxDescripcionBU.Size = new Size(217, 23);
+            textBoxDescripcionBU.ReadOnly = true;
+            textBoxDescripcionBU.Size = new Size(217, 40);
             textBoxDescripcionBU.TabIndex = 25;
             // 
             // pictureBoxBuscarForm
             // 
-            pictureBoxBuscarForm.Location = new Point(546, 149);
+            pictureBoxBuscarForm.BorderStyle = BorderStyle.FixedSingle;
+            pictureBoxBuscarForm.Location = new Point(546, 150);
             pictureBoxBuscarForm.Margin = new Padding(3, 2, 3, 2);
             pictureBoxBuscarForm.Name = "pictureBoxBuscarForm";
-            pictureBoxBuscarForm.Size = new Size(134, 69);
+            pictureBoxBuscarForm.Size = new Size(150, 150);
+            pictureBoxBuscarForm.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBoxBuscarForm.TabIndex = 26;
             pictureBoxBuscarForm.TabStop = false;
             // 
@@ -260,19 +288,125 @@
             // 
             // buttonCargarImagenBU
             // 
-            buttonCargarImagenBU.Location = new Point(546, 233);
+            buttonCargarImagenBU.Location = new Point(546, 312);
             buttonCargarImagenBU.Margin = new Padding(3, 2, 3, 2);
             buttonCargarImagenBU.Name = "buttonCargarImagenBU";
             buttonCargarImagenBU.Size = new Size(125, 32);
             buttonCargarImagenBU.TabIndex = 28;
             buttonCargarImagenBU.Text = "Cargar Imagen";
             buttonCargarImagenBU.UseVisualStyleBackColor = true;
+            buttonCargarImagenBU.Visible = false;
+            // 
+            // lblCategoriaBU
+            // 
+            lblCategoriaBU.AutoSize = true;
+            lblCategoriaBU.Location = new Point(188, 325);
+            lblCategoriaBU.Name = "lblCategoriaBU";
+            lblCategoriaBU.Size = new Size(58, 15);
+            lblCategoriaBU.TabIndex = 29;
+            lblCategoriaBU.Text = "Categoría";
+            // 
+            // textBoxCategoriaBU
+            // 
+            textBoxCategoriaBU.BackColor = Color.LightGray;
+            textBoxCategoriaBU.Enabled = false;
+            textBoxCategoriaBU.Location = new Point(300, 323);
+            textBoxCategoriaBU.Name = "textBoxCategoriaBU";
+            textBoxCategoriaBU.ReadOnly = true;
+            textBoxCategoriaBU.Size = new Size(150, 23);
+            textBoxCategoriaBU.TabIndex = 30;
+            // 
+            // lblUnidadMedidaBU
+            // 
+            lblUnidadMedidaBU.AutoSize = true;
+            lblUnidadMedidaBU.Location = new Point(188, 354);
+            lblUnidadMedidaBU.Name = "lblUnidadMedidaBU";
+            lblUnidadMedidaBU.Size = new Size(101, 15);
+            lblUnidadMedidaBU.TabIndex = 31;
+            lblUnidadMedidaBU.Text = "Unidad de Medida";
+            // 
+            // textBoxUnidadMedidaBU
+            // 
+            textBoxUnidadMedidaBU.BackColor = Color.LightGray;
+            textBoxUnidadMedidaBU.Enabled = false;
+            textBoxUnidadMedidaBU.Location = new Point(300, 352);
+            textBoxUnidadMedidaBU.Name = "textBoxUnidadMedidaBU";
+            textBoxUnidadMedidaBU.ReadOnly = true;
+            textBoxUnidadMedidaBU.Size = new Size(150, 23);
+            textBoxUnidadMedidaBU.TabIndex = 32;
+            // 
+            // lblPesoBU
+            // 
+            lblPesoBU.AutoSize = true;
+            lblPesoBU.Location = new Point(188, 383);
+            lblPesoBU.Name = "lblPesoBU";
+            lblPesoBU.Size = new Size(32, 15);
+            lblPesoBU.TabIndex = 33;
+            lblPesoBU.Text = "Peso";
+            // 
+            // textBoxPesoBU
+            // 
+            textBoxPesoBU.BackColor = Color.LightGray;
+            textBoxPesoBU.Enabled = false;
+            textBoxPesoBU.Location = new Point(300, 381);
+            textBoxPesoBU.Name = "textBoxPesoBU";
+            textBoxPesoBU.ReadOnly = true;
+            textBoxPesoBU.Size = new Size(150, 23);
+            textBoxPesoBU.TabIndex = 34;
+            // 
+            // lblFechaIngresoBU
+            // 
+            lblFechaIngresoBU.AutoSize = true;
+            lblFechaIngresoBU.Location = new Point(188, 412);
+            lblFechaIngresoBU.Name = "lblFechaIngresoBU";
+            lblFechaIngresoBU.Size = new Size(94, 15);
+            lblFechaIngresoBU.TabIndex = 35;
+            lblFechaIngresoBU.Text = "Fecha de Ingreso";
+            // 
+            // textBoxFechaIngresoBU
+            // 
+            textBoxFechaIngresoBU.BackColor = Color.LightGray;
+            textBoxFechaIngresoBU.Enabled = false;
+            textBoxFechaIngresoBU.Location = new Point(300, 410);
+            textBoxFechaIngresoBU.Name = "textBoxFechaIngresoBU";
+            textBoxFechaIngresoBU.ReadOnly = true;
+            textBoxFechaIngresoBU.Size = new Size(150, 23);
+            textBoxFechaIngresoBU.TabIndex = 36;
+            // 
+            // lblBodegaBU
+            // 
+            lblBodegaBU.AutoSize = true;
+            lblBodegaBU.Location = new Point(188, 441);
+            lblBodegaBU.Name = "lblBodegaBU";
+            lblBodegaBU.Size = new Size(47, 15);
+            lblBodegaBU.TabIndex = 37;
+            lblBodegaBU.Text = "Bodega";
+            // 
+            // textBoxBodegaBU
+            // 
+            textBoxBodegaBU.BackColor = Color.LightGray;
+            textBoxBodegaBU.Enabled = false;
+            textBoxBodegaBU.Location = new Point(300, 439);
+            textBoxBodegaBU.Name = "textBoxBodegaBU";
+            textBoxBodegaBU.ReadOnly = true;
+            textBoxBodegaBU.Size = new Size(200, 23);
+            textBoxBodegaBU.TabIndex = 38;
             // 
             // BuscarForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(700, 338);
+            ClientSize = new Size(720, 500);
+            Controls.Add(textBoxBodegaBU);
+            Controls.Add(lblBodegaBU);
+            Controls.Add(textBoxFechaIngresoBU);
+            Controls.Add(lblFechaIngresoBU);
+            Controls.Add(textBoxPesoBU);
+            Controls.Add(lblPesoBU);
+            Controls.Add(textBoxUnidadMedidaBU);
+            Controls.Add(lblUnidadMedidaBU);
+            Controls.Add(textBoxCategoriaBU);
+            Controls.Add(lblCategoriaBU);
             Controls.Add(buttonCargarImagenBU);
             Controls.Add(lblImagenBU);
             Controls.Add(pictureBoxBuscarForm);
@@ -297,7 +431,7 @@
             Controls.Add(panelLeft);
             Margin = new Padding(3, 2, 3, 2);
             Name = "BuscarForm";
-            Text = "Form2";
+            Text = "Buscar Producto";
             Load += BuscarForm_Load;
             panelLeft.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBoxBuscarForm).EndInit();
@@ -330,5 +464,15 @@
         private PictureBox pictureBoxBuscarForm;
         private Label lblImagenBU;
         private Button buttonCargarImagenBU;
+        private Label lblCategoriaBU;
+        private TextBox textBoxCategoriaBU;
+        private Label lblUnidadMedidaBU;
+        private TextBox textBoxUnidadMedidaBU;
+        private Label lblPesoBU;
+        private TextBox textBoxPesoBU;
+        private Label lblFechaIngresoBU;
+        private TextBox textBoxFechaIngresoBU;
+        private Label lblBodegaBU;
+        private TextBox textBoxBodegaBU;
     }
 }
