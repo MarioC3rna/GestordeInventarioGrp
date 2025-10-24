@@ -68,7 +68,7 @@ P.Producto_CostoUnitario,
    P.Producto_Descuento,
       P.Producto_FechaIngreso,
   CONCAT(UM.UnidadMedida_Longitud, ' ', UM.UnidadMedida_AbrevLongitud) AS UnidadMedida,
-     CONCAT(UM.Unidad_Medida_Peso, ' ', UM.UnidadMedida_AbrevPeso) AS Peso,
+     CONCAT(UM.UnidadMedida_Peso, ' ', UM.UnidadMedida_AbrevPeso) AS Peso,
  PR.Proveedor_Nombre AS Proveedor,
  SB.ServicioBien_Tipo AS ServicioBien,
    C.Categoria_Nombre AS Categoria,
@@ -87,7 +87,7 @@ LEFT JOIN Invt.Tb_Inventario I ON P.Producto_Id = I.Producto_Id
  GROUP BY 
  P.Producto_Nombre, P.Producto_Descripcion, P.Producto_CostoUnitario,
         P.Producto_Descuento, P.Producto_FechaIngreso, UM.UnidadMedida_Longitud, UM.UnidadMedida_AbrevLongitud,
-  UM.Unidad_Medida_Peso, UM.UnidadMedida_AbrevPeso, PR.Proveedor_Nombre,
+  UM.UnidadMedida_Peso, UM.UnidadMedida_AbrevPeso, PR.Proveedor_Nombre,
   SB.ServicioBien_Tipo, C.Categoria_Nombre, P.Producto_ImagenRuta;
   ";
 

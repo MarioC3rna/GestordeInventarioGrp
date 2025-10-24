@@ -35,34 +35,34 @@ namespace Proyecto_Base_de_Datos
                 using (var connection = DatabaseConnection.CreateConnection())
                 {
                     string query = @"
-                        SELECT 
+   SELECT 
         P.Producto_Codigo, 
          P.Producto_Nombre,
-       P.Producto_Descripcion,
+     P.Producto_Descripcion,
    P.Producto_CostoUnitario,
  P.Producto_Descuento,
          P.Producto_FechaIngreso,
          CONCAT(UM.UnidadMedida_Longitud, ' ', UM.UnidadMedida_AbrevLongitud) AS UnidadMedida,
-  CONCAT(UM.Unidad_Medida_Peso, ' ', UM.UnidadMedida_AbrevPeso) AS Peso,
+  CONCAT(UM.UnidadMedida_Peso, ' ', UM.UnidadMedida_AbrevPeso) AS Peso,
         PR.Proveedor_Nombre AS Proveedor,
               SB.ServicioBien_Tipo AS ServicioBien,
-            C.Categoria_Nombre AS Categoria,
+      C.Categoria_Nombre AS Categoria,
    P.Producto_ImagenRuta,
       ISNULL(SUM(I.Cantidad_Disponible), 0) AS Stock_Total,
          STRING_AGG(B.Bodega_NumeroBodega, ', ') AS Bodegas
 FROM Invt.Tb_Productos P
       INNER JOIN Invt.Tb_UnidadMedidas UM ON P.UnidadMedida_Id = UM.UnidadMedida_Id
   INNER JOIN Invt.Tb_Proveedores PR ON P.Proveedor_Id = PR.Proveedor_Id
-          INNER JOIN Invt.Tb_ServiciosBienes SB ON P.ServicioBien_Id = SB.ServicioBien_Id
+        INNER JOIN Invt.Tb_ServiciosBienes SB ON P.ServicioBien_Id = SB.ServicioBien_Id
   INNER JOIN Invt.Tb_Categorias C ON P.Categoria_Id = C.Categoria_Id
  LEFT JOIN Invt.Tb_Inventario I ON P.Producto_Id = I.Producto_Id
    LEFT JOIN Invt.Tb_Estanterias E ON I.Estanteria_Id = E.Estanteria_Id
      LEFT JOIN Invt.Tb_Bodegas B ON E.Bodega_Id = B.Bodega_Id
        WHERE P.Producto_Codigo = @Codigo
    GROUP BY 
-           P.Producto_Codigo, P.Producto_Nombre, P.Producto_Descripcion, P.Producto_CostoUnitario,
+    P.Producto_Codigo, P.Producto_Nombre, P.Producto_Descripcion, P.Producto_CostoUnitario,
    P.Producto_Descuento, P.Producto_FechaIngreso, UM.UnidadMedida_Longitud, UM.UnidadMedida_AbrevLongitud,
-    UM.Unidad_Medida_Peso, UM.UnidadMedida_AbrevPeso, PR.Proveedor_Nombre,
+    UM.UnidadMedida_Peso, UM.UnidadMedida_AbrevPeso, PR.Proveedor_Nombre,
     SB.ServicioBien_Tipo, C.Categoria_Nombre, P.Producto_ImagenRuta";
 
                     using (SqlCommand cmd = new SqlCommand(query, connection))

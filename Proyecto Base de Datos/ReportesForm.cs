@@ -305,10 +305,14 @@ condiciones.Add("P.Categoria_Id = @CategoriaId");
    condiciones.Add("P.Proveedor_Id = @ProveedorId");
      }
 
- // ? Filtro por bodega usando Bodega_Id
+ // ? Filtro por bodega solo para reportes que incluyen la tabla Bodegas
     if (checkBoxBodega.Checked && comboBoxBodega.SelectedValue != null)
     {
-     condiciones.Add("B.Bodega_Id = @BodegaId");
+     // Solo aplicar filtro de bodega si es reporte de inventario o productos por bodega
+        if (radioButtonInventario.Checked || radioButtonVentas.Checked)
+        {
+        condiciones.Add("B.Bodega_Id = @BodegaId");
+        }
  }
 
   return condiciones.Count > 0 ? "WHERE " + string.Join(" AND ", condiciones) : "";
